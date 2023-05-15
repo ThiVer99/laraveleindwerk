@@ -1,4 +1,4 @@
-@include('components._header')
+@include('components._backend-header')
 
 <body id="page-top">
 
@@ -6,7 +6,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    @include('components._sidebar')
+    @include('components._backend-sidebar')
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -16,17 +16,17 @@
         <div id="content">
 
             <!-- Topbar -->
-            @include('components._topbar')
+            @include('components._backend-topbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <x-page-heading title="Backend" buttonText="Generate" buttonUrl="/custom-url" />
+                <x-page-heading title="Backend" buttonText="Generate" buttonUrl="/custom-url"/>
 
                 <!-- Content Row -->
-                @include('components._cards')
+                @include('components._backend-cards')
 
                 <!-- Content Row -->
                 @yield('content')
@@ -37,4 +37,4 @@
 
         </div>
         <!-- End of Main Content -->
-@include('components._footer')
+@include('components._backend-footer')

@@ -22,7 +22,8 @@
             <input type="hidden" name="post_id" value="{{$post->id}}">
             <input type="hidden" name="parent_id" value="{{$comment->id}}">
             <div class="form-group">
-                <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="Message"></textarea>
+                <textarea class="form-control" name="body" id="body" cols="30" rows="10"
+                          placeholder="Message"></textarea>
             </div>
             <button type="submit" class="btn leave-comment-btn">SUBMIT <i class="fa fa-angle-right ml-2"></i></button>
         </form>
@@ -30,7 +31,7 @@
     @if($comment->children->isNotEmpty())
         <ol class="children pl-5">
             @foreach($comment->children as $child)
-                @include('components._comment', ['comment' => $child])
+                @include('components._backend-comment', ['comment' => $child])
             @endforeach
         </ol>
     @endif

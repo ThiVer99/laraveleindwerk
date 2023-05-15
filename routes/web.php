@@ -5,12 +5,14 @@ use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItunesController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ShopController;
 use App\Models\Post;
 use App\Models\ProductCategory;
 use App\Models\User;
@@ -32,6 +34,8 @@ use Illuminate\Support\Facades\Route;
 //    return view("home");
 //});
 Route::get('/',[HomeController::class,'index'])->name('frontend.home');
+Route::get("/shop", [ShopController::class, "index"])->name("frontend.shop");
+Route::get("/cart", [CartController::class, "index"])->name("frontend.cart");
 Route::get('contactformulier',[ContactController::class,'create'])->name('contact.create');
 Route::post('contactformulier',[ContactController::class,'store'])->name('contact.store');
 Route::get('/post/{post:slug}', [AdminPostsController::class,'post'])->name('frontend.post');
@@ -45,7 +49,7 @@ Route::group(["prefix" => "admin", "middleware" => ['auth','verified']], functio
     Route::get("/", [
         BackendController::class,
         "index",
-    ])->name("home");
+    ])->name("backend.home");
 //    Post routes
     Route::resource('posts', AdminPostsController::class,['except'=>['show']]);
     Route::get('posts/{post:slug}', [AdminPostsController::class, 'show'])->name('posts.show');

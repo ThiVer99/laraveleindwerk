@@ -1,11 +1,416 @@
-    /* ----------------------------------------------------------
-    :: Template Name: TheGazette - News Magazine HTML5 Template
-    :: Author: Colorlib
-    :: Author URL: https://colorlib.com
-    :: Description: TheGazette is a smart & creative news & magazine template. It's suitable for all news & magazine website.
-    :: Version: 1.0.0
-    :: Created: 17 January 2018
-    :: Last Updated: 17 January 2018
-    ---------------------------------------------------------- */
+/*begin fonts*/
+@font-face {
+    font-family: pmr;
+    src: url("../fonts/PermanentMarker-Regular.ttf");
+}
 
-    /* ============ PLACE YOUR CUSTOM CSS HERE ============ */
+.ff-pmr {
+    font-family: pmr, sans-serif;
+}
+
+@font-face {
+    font-family: rmv;
+    src: url("../fonts/RobotoMono-VariableFont_wght.ttf");
+}
+
+.ff-rmv {
+    font-family: rmv, sans-serif;
+}
+
+/*einde fonts*/
+/*begin font size*/
+.fs-320 {
+    font-size: 320px;
+}
+
+/*end font size*/
+/*begin button*/
+.btn-main {
+    color: black;
+    background-color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+.btn-main:hover {
+    color: white;
+    background-color: black;
+    padding: 10px 25px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.btn-main-border {
+    color: black;
+    background-color: white;
+    width: 100%;
+    padding: 10px 25px;
+    border: 2px solid transparent;
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+.btn-main-border:hover {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    padding: 10px 25px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.btn-add-cart {
+    font-family: rmv,sans-serif;
+    color: white;
+    padding: 10px 70px;
+    background-color: black;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+.btn-add-cart:hover {
+    color: black;
+    background-color: red;
+    transition-duration: 0.2s;
+}
+
+/*einde button*/
+/*eigen classes*/
+.pt-6{
+    padding-top: 60px;
+}
+/*einde eigen classes*/
+/*begin header*/
+/*begin nav*/
+nav {
+    background-color: black;
+}
+
+.brand {
+    color: white;
+    transition-duration: 0.2s;
+}
+
+.brand:hover {
+    color: red;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.nav-link {
+    color: white;
+    float: left;
+    position: relative;
+    padding: 10px 20px;
+    overflow: hidden;
+}
+
+.nav-link:hover {
+    color: red;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+/*red line effect on nav hover*/
+.nav-link::after {
+    background-color: red;
+    content: "";
+    width: 0;
+    height: 3px;
+    left: 0;
+    bottom: 0;
+    transition: width 0.35s ease 0s;
+    position: absolute;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/*einde red line effect on nav hover*/
+/*einde nav*/
+#home-header img{
+    position: fixed;
+    height: 100%;
+    object-fit: cover;
+    z-index: -50;
+    left: 0;
+    object-position: 50% 75%;
+}
+
+/*einde header*/
+/*begin collections*/
+#collections {
+    background-color: darkslategrey;
+}
+
+#menc {
+    background-image: url("../images/skate.png");
+    background-size: 100%;
+    background-position: center;
+    height: 567px;
+    -webkit-transition: 0.8s;
+}
+
+#womenc {
+    background-image: url("../images/legs.png");
+    background-size: 100%;
+    background-position: center;
+    height: 567px;
+    -webkit-transition: 0.8s;
+}
+
+#menc:hover, #womenc:hover {
+    background-size: 110%;
+    cursor: pointer;
+}
+
+/*einde collections*/
+/*begin sale*/
+#shoeshuffle {
+    height: 70vh;
+}
+#shoeshuffle img{
+    position: fixed;
+    height: 100%;
+    object-fit: cover;
+    z-index: -45;
+    left: 0;
+}
+
+#salediv {
+    padding-top: 20px;
+    padding-bottom: 35px;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+/*einde sale*/
+/*begin random shoes*/
+/*einde random shoes*/
+/*begin footer*/
+footer {
+    background-color: black;
+}
+
+.contact-input {
+    background: none;
+    width: 100%;
+    border: 1px solid white;
+    padding: 10px;
+    transition-duration: 0.2s;
+
+}
+
+.contact-input:hover {
+    border: 4px solid white;
+    padding: 7px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.contact-input-message {
+    height: 100%;
+}
+
+.facebook, .twitter, .instagram {
+    transition-duration: 0.2s;
+}
+
+.facebook:hover {
+    color: #4267B2;
+    transition-duration: 0.2s;
+}
+
+.twitter:hover {
+    color: #1DA1F2;
+    transition-duration: 0.2s;
+}
+
+.instagram:hover {
+    transition-duration: 0.2s;
+    color: #833AB4;
+}
+
+/*einde footer*/
+
+/*begin shop*/
+/*begin shop-header*/
+#shop-header{
+    margin-top: 50px;
+    height: 40vh;
+}
+#shop-header img{
+    position: fixed;
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+    object-position: 50% 59%;
+    z-index: -50;
+}
+
+/*begin shop-header*/
+/*begin filters*/
+.accordion-button:not(.collapsed){
+    background-color: transparent;
+    color: red;
+}
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='red'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") ;
+}
+
+/*einde filters*/
+/*begin shop-content*/
+#content {
+    padding-top: 40px;
+}
+.card{
+    font-family: rmv,sans-serif;
+    text-align: center;
+    border-radius: 0;
+    border: 2px solid black;
+}
+.card:hover{
+    border: 2px solid red;
+}
+
+.card img{
+    border-radius: 0;
+    border-bottom: 2px solid black;
+}
+.card:hover img{
+    border-radius: 0;
+    border-bottom: 2px solid red;
+}
+/*einde shop-content*/
+/*einde shop*/
+/*begin shop-item*/
+
+/*einde shop-item*/
+/*begin shoppingcart*/
+.border-cart-item{
+    border: 2px solid black
+}
+.border-cart-item:hover{
+    border: 2px solid red
+}
+.cart-delete{
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+}
+.btn-delete{
+    font-family: rmv,sans-serif;
+    color: white;
+    padding: 10px;
+    background-color: red;
+    transition-duration: 0.2s;
+    border: none;
+    width: 100%;
+}
+.btn-delete:hover{
+    background-color: black;
+    transition-duration: 0.2s;
+}
+.btn-checkout {
+    font-family: rmv,sans-serif;
+    color: white;
+    padding: 10px 70px;
+    background-color: black;
+    text-decoration: none;
+    transition-duration: 0.2s;
+    border: none;
+    width: 100%;
+}
+
+.btn-checkout:hover {
+    color: black;
+    background-color: red;
+    transition-duration: 0.2s;
+}
+.btn-discount{
+    font-family: rmv,sans-serif;
+    color: white;
+    padding: 0 15px;
+    background-color: black;
+    text-decoration: none;
+    transition-duration: 0.2s;
+    border: none;
+}
+.btn-discount:hover{
+    color: black;
+    background-color: red;
+    transition-duration: 0.2s;
+}
+.discount-input{
+    border: 2px solid black;
+    border-radius: 0;
+    transition-duration: 0.2s;
+}
+.discount-input:hover{
+    transition-duration: 0.2s;
+    border: 2px solid red;
+}
+.discount-dropdown{
+    border: 2px solid black;
+}
+
+/*einde shoppingcart*/
+/*begin login*/
+.bg-red{
+    background-color: darkred;
+}
+.btn-login {
+    color: white;
+    background-color: black;
+    width: 100%;
+    padding: 10px 25px;
+    border-radius: 0;
+    border: 2px solid black;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+.btn-login:hover {
+    color: black;
+    background-color: transparent;
+    border: 2px solid black;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+.login-input{
+    border: 2px solid black;
+    border-radius: 0;
+}
+.login-hover{
+    transition-duration: 0.2s;
+}
+.login-hover:hover{
+    color: black;
+    transition-duration: 0.2s;
+}
+/*einde login*/
+/*begin customer service*/
+
+/*einde customer service*/
+/*begin media queries*/
+@media (max-width: 768px) {
+    .contact-input-message {
+        height: 20vh;
+    }
+
+    .fs-320 {
+        font-size: 200px;
+    }
+
+    #womenc, #menc {
+        background-size: 100%;
+        height: 280px;
+        -webkit-transition: 0.8s;
+    }
+}
+
+/*einde media queries*/

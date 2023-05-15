@@ -1,0 +1,79 @@
+@extends('layouts.app')
+@section('content')
+    <div class="bg-white row min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-12 col-lg-10 row">
+            <div class="col-12 col-lg-8 ff-rmv">
+                <h2>My cart</h2>
+                <hr>
+                <div class="row py-4 position-relative">
+                    <div class="col-4 col-lg-2">
+                        <a href="shopItem.html">
+                            <img alt="shoe" class="img-fluid border-cart-item" src="{{asset('./images/shoe1.png')}}">
+                        </a>
+                    </div>
+                    <div class="col-8 col-lg-5 row align-items-center">
+                        <p>Name: Nike Air Jordan</p>
+                        <p>Price: € 119,00</p>
+                        <p>Size: 43</p>
+                        <p class="m-0">Color: Black and Red</p>
+                    </div>
+                    <div class="col-4 offset-4 offset-lg-0 col-lg-2 py-3 py-lg-0">
+                        <select class="form-select" name="quantity" id="selectQuantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-4 col-lg-2 py-3 py-lg-0">
+                        <p>€ 119,00</p>
+                    </div>
+                    <div class="col-2 offset-9 offset-lg-0 col-lg-1 cart-delete">
+                        <button class="btn-delete">X</button>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-12 col-lg-4 ff-rmv">
+                <h2>Order summary</h2>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <p>subtotal:</p>
+                    <p>€119,00</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>shipping:</p>
+                    <p>€5,00</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Discount code: "Leve Cercle"</p>
+                    <p>-€20,00</p>
+                </div>
+                <hr>
+                <div>
+                    <div class="d-flex justify-content-between">
+                        <h5>Total:</h5>
+                        <p>€104,00</p>
+                    </div>
+                    <a href="checkoutAdres.html"><button class="btn-checkout mb-4">Checkout</button></a>
+                    <div class="accordion" id="accordionExample">
+                        <div class="discount-dropdown">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Enter discount code
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body d-flex">
+                                    <input class="discount-input" type="text">
+                                    <button class="btn-discount ms-2">Toepassen</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
