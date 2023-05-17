@@ -63,6 +63,7 @@ class ProductsController extends Controller
         $product->name = $request->name;
         $product->brand_id = $request->brand_id;
         $product->body = $request->body;
+        $product->price = $request->price;
         if ($file = $request->file("photo_id")) {
             $path = request()
                 ->file("photo_id")

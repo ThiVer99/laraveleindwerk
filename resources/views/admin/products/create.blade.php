@@ -15,6 +15,12 @@
             <p class="text-danger fs-6">{{$message}}</p>
             @enderror
         </div>
+        <div class="form-group mb-3">
+            <input name="price" type="number" step="0.01" class="form-control" placeholder="Price">
+            @error('price')
+            <p class="text-danger fs-6">{{$message}}</p>
+            @enderror
+        </div>
         <div class="d-flex justify-content-around border border-1 my-3 py-3 bg-white">
             <div class="form-group mb-3 d-flex flex-column">
                 <label>Brands</label>
@@ -56,7 +62,7 @@
         </div>
 
         <div class="form-group mb-3">
-            <textarea name="body" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+            <textarea name="body" class="form-control" placeholder="Description..." id="floatingTextarea2" style="height: 100px"></textarea>
             @error('body')
             <p class="text-danger fs-6">{{$message}}</p>
             @enderror

@@ -17,8 +17,8 @@
             </div>
         </div>
         <div class="d-flex">
-            <a href="{{route('posts.index')}}" class="btn btn-primary m-2 rounded-pill">All Products</a>
-            <a href="#" class="btn btn-primary m-2 rounded-pill">Add Product</a>
+            <a href="{{route('products.index')}}" class="btn btn-primary m-2 rounded-pill">All Products</a>
+            <a href="{{route('products.create')}}" class="btn btn-primary m-2 rounded-pill">Add Product</a>
         </div>
 
     </div>
@@ -38,6 +38,7 @@
             <th>Name</th>
             <th>Keywords</th>
             <th>Body</th>
+            <th>Price</th>
             <th>Created</th>
             <th>Updated</th>
             <th>Actions</th>
@@ -66,6 +67,7 @@
                     @endforeach
                 </td>
                 <td>{{Str::limit($product->body,20)}}</td>
+                <td>&euro;{{$product->price}}</td>
                 <td>{{$product->created_at ? $product->created_at->diffForHumans() : ''}}</td>
                 <td>{{$product->updated_at ? $product->updated_at->diffForHumans() : ''}}</td>
                 <td>
