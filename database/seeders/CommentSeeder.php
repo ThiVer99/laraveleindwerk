@@ -15,7 +15,7 @@ class CommentSeeder extends Seeder
     public function run()
     {
 // Maak 2000 comments aan
-        $comments = Comment::factory()->count(2000)->create();
+        $comments = Comment::factory()->count(100)->create();
 // Wijs aan elk comment een willekeurige parent_id toe
         foreach ($comments as $comment) {
 // Haal alle reacties op voor dezelfde post en ken ze willekeurig een parent toe

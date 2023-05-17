@@ -18,15 +18,18 @@ class ProductSeeder extends Seeder
     public function run()
     {
         //
-//        $brands = Brand::all();
-//        $photos = Photo::all();
-//        for ($i = 0; $i < 100; $i++) {
-//            $product = new Product();
-//            $product->name = fake()->words(2, true);
-//            $product->body = fake()->paragraphs(3, true);
-//            $product->photo_id = $photos->random()->id;
-//            $product->brand_id = $brands->random()->id;
-//            $product->save();
-//        }
+        $brands = Brand::all();
+        $photos = Photo::all();
+        for ($i = 0; $i < 100; $i++) {
+            $product = new Product();
+            $product->name = fake()->words(2, true);
+            $product->body = fake()->paragraphs(3, true);
+            $product->photo_id = $photos->random()->id;
+            $product->brand_id = $brands->random()->id;
+            $product->price = fake()->randomDigit();
+            $product->men = fake()->boolean;
+            $product->women = fake()->boolean;
+            $product->save();
+        }
     }
 }

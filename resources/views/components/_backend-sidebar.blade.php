@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center" href="{{route('backend.home')}}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-cogs"></i>
         </div>
@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('backend.home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>CRM</span></a>
     </li>
@@ -90,9 +90,9 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('frontend.home')}}">
             <i class="fas fa-shopping-bag"></i>
-            <span>E-COMMERCE</span></a>
+            <span>Awesome Sneakers</span></a>
     </li>
 
     <!-- Divider -->

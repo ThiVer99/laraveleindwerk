@@ -52,18 +52,33 @@ class ProductsController extends Controller
             'name'=> ['required','between:3,255'],
             'keywords' => ['required', Rule::exists('keywords', 'id')],
             'body'=>'required',
+            'gender' => 'required|min:1'
         ],
             [
                 'name.required'=> 'Product name is required',
                 'title.between' => 'Product name between 3 and 255 characters required',
                 'body.required'=>'Message is required',
-                'keywords.required'=>'Please check minimum one keyword'
+                'keywords.required'=>'Please check minimum one keyword',
+                'gender.required' => 'select at least 1 gender or both'
             ]);
         $product = new Product();
         $product->name = $request->name;
         $product->brand_id = $request->brand_id;
         $product->body = $request->body;
         $product->price = $request->price;
+
+        if (in_array('men', $request->get('gender'))){
+            $product->men = 1;
+        }else{
+            $product->men = 0;
+        }
+        if (in_array('women', $request->get('gender'))){
+            $product->women = 1;
+        }else{
+            $product->women = 0;
+        }
+
+
         if ($file = $request->file("photo_id")) {
             $path = request()
                 ->file("photo_id")
@@ -142,4 +157,19 @@ class ProductsController extends Controller
         return view('admin.products.index', compact('products', 'brands'));
     }
 
+    public function productsPerGenderMen(){
+        $brands = Brand::all();
+        $products = Product::where('men',1)->where('women',0)->with(['keywords','photo','brand','productcategories'])->paginate(10);
+        return view('admin.products.index',compact('products','brands'));
+    }
+    public function productsPerGenderWomen(){
+        $brands = Brand::all();
+        $products = Product::where('men',0)->where('women',1)->with(['keywords','photo','brand','productcategories'])->paginate(10);
+        return view('admin.products.index',compact('products','brands'));
+    }
+    public function productsPerGenderUnisex(){
+        $brands = Brand::all();
+        $products = Product::where('men',1)->where('women',1)->with(['keywords','photo','brand','productcategories'])->paginate(10);
+        return view('admin.products.index',compact('products','brands'));
+    }
 }

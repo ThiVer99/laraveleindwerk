@@ -27,7 +27,8 @@
                 <div class="btn-group-vertical">
                     @foreach($brands as $brand)
                         <label>
-                            <input type="radio" name="brand_id" value="{{ $brand->id }}" autocomplete="off"> {{ $brand->name }}
+                            <input type="radio" name="brand_id" value="{{ $brand->id }}"
+                                   autocomplete="off"> {{ $brand->name }}
                         </label>
                     @endforeach
                 </div>
@@ -39,7 +40,8 @@
                 <label>Keywords</label>
                 @foreach($keywords as $keyword)
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{$keyword->id}}" id="keyword{{$keyword->id}}" name="keywords[]">
+                        <input class="form-check-input" type="checkbox" value="{{$keyword->id}}"
+                               id="keyword{{$keyword->id}}" name="keywords[]">
                         <label class="form-check-label" for="keyword{{$keyword->id}}">{{$keyword->name}}</label>
                     </div>
                 @endforeach
@@ -51,7 +53,8 @@
                 <label>Categorieën</label>
                 @foreach($productcategories as $category)
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{$category->id}}" id="category{{$category->id}}" name="productcategories[]">
+                        <input class="form-check-input" type="checkbox" value="{{$category->id}}"
+                               id="category{{$category->id}}" name="productcategories[]">
                         <label class="form-check-label" for="category{{$category->id}}">{{$category->name}}</label>
                     </div>
                 @endforeach
@@ -59,10 +62,25 @@
                 <p class="text-danger fs-6">{{$message}}</p>
                 @enderror
             </div>
+            <div class="form-group mb3">
+                <label>Gender</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="men" name="gender[]" value="men">
+                    <label class="form-check-label" for="men">Men</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="women" name="gender[]" value="women">
+                    <label class="form-check-label" for="women">Women</label>
+                </div>
+                @error('gender')
+                <p class="text-danger fs-6">{{$message}}</p>
+                @enderror
+            </div>
         </div>
 
         <div class="form-group mb-3">
-            <textarea name="body" class="form-control" placeholder="Description..." id="floatingTextarea2" style="height: 100px"></textarea>
+            <textarea name="body" class="form-control" placeholder="Description..." id="floatingTextarea2"
+                      style="height: 100px"></textarea>
             @error('body')
             <p class="text-danger fs-6">{{$message}}</p>
             @enderror

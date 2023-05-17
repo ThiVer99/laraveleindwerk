@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['photo_id','name', 'body','price'];
+    protected $fillable = ['photo_id','name', 'body','price','men','women'];
 
     public function keywords(){
         return $this->morphToMany(Keyword::class,'keywordable');

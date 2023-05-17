@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('body');
             $table->decimal('price',8,2);
+            $table->boolean("men");
+            $table->boolean("women");
             $table->timestamps();
         });
     }
