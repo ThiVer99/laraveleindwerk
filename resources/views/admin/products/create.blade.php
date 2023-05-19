@@ -22,6 +22,7 @@
             @enderror
         </div>
         <div class="d-flex justify-content-around border border-1 my-3 py-3 bg-white">
+            <!-- BRANDS -->
             <div class="form-group mb-3 d-flex flex-column">
                 <label>Brands</label>
                 <div class="btn-group-vertical">
@@ -36,6 +37,7 @@
                 <p class="text-danger fs-6">{{ $message }}</p>
                 @enderror
             </div>
+            <!-- KEYWORDS -->
             <div class="form-group mb3">
                 <label>Keywords</label>
                 @foreach($keywords as $keyword)
@@ -49,6 +51,7 @@
                 <p class="text-danger fs-6">{{$message}}</p>
                 @enderror
             </div>
+            <!-- CATEGORIES -->
             <div class="form-group mb3">
                 <label>Categorieën</label>
                 @foreach($productcategories as $category)
@@ -58,10 +61,11 @@
                         <label class="form-check-label" for="category{{$category->id}}">{{$category->name}}</label>
                     </div>
                 @endforeach
-                @error('categories')
+                @error('productcategories')
                 <p class="text-danger fs-6">{{$message}}</p>
                 @enderror
             </div>
+            <!-- GENDERS -->
             <div class="form-group mb3">
                 <label>Gender</label>
                 <div class="form-check">
@@ -87,6 +91,9 @@
         </div>
         <div class="form-group">
             <input type="file" name="photo_id" id="ChooseFile">
+            @error('photo_id')
+            <p class="text-danger fs-6">{{$message}}</p>
+            @enderror
         </div>
         <button type="submit" class="ml-auto btn btn-dark d-flex justify-content-end me-3">ADD PRODUCTS</button>
     </form>

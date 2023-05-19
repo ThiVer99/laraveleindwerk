@@ -37,11 +37,11 @@
         <tr>
             <th>Id</th>
             <th>Photo</th>
-            <th>Categories</th>
             <th>Brand</th>
             <th>Name</th>
             <th>Body</th>
             <th>Gender</th>
+            <th>Categories</th>
             <th>Price</th>
             <th>Created</th>
             <th>Updated</th>
@@ -55,13 +55,6 @@
                 <td><img class="img-thumbnail" width="62" height="62"
                          src="{{$product->photo ? asset($product->photo->file) : 'http://via.placeholder.com/62x62'}}"
                          alt="{{$product->title}}"></td>
-                <td>
-                    @foreach($product->productcategories as $productcategory)
-                        <span class="badge badge-pill badge-warning">
-                                {{$productcategory->name}}
-                            </span>
-                    @endforeach
-                </td>
                 <td>{{$product->brand->name}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{Str::limit($product->body,20)}}</td>
@@ -75,6 +68,13 @@
                     @if($product->women == 1 && $product->men == 1 || $product->women == 0 && $product->men == 0)
                         Unisex
                     @endif
+                </td>
+                <td>
+                    @foreach($product->productcategories as $productcategory)
+                        <span class="badge badge-pill badge-warning">
+                                {{$productcategory->name}}
+                            </span>
+                    @endforeach
                 </td>
                 <td>&euro;{{ $product->price }}</td>
                 <td>{{$product->created_at ? $product->created_at->diffForHumans() : ''}}</td>

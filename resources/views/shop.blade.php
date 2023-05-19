@@ -103,19 +103,21 @@
                 </div>
             </div>
             <div class="col-12 col-lg-10 d-flex flex-wrap justify-content-center" id="content">
+                @foreach($products as $product)
                 <a class="text-decoration-none text-black" href="shopItem.html">
                     <div class="card m-2" style="width: 19rem">
-                        <img alt="shoe" class="card-img-top" src="{{asset('./images/shoe1.png')}}">
+                        <img alt="shoe" class="card-img-top" src="{{asset($product->photo->file)}}">
                         <div class="card-body">
-                            <h3 class="card-title">i'm a shoe!</h3>
-                            <p class="card-text">€ 119.95</p>
+                            <h3 class="card-title">{{$product->name}}</h3>
+                            <p class="card-text">&euro; {{$product->price}}</p>
                             <div class="py-3">
                                 <a class="btn-add-cart" href="shoppingCart.html">Add to Cart</a>
                             </div>
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none text-black" href="shopItem.html">
+                @endforeach
+<!--                <a class="text-decoration-none text-black" href="shopItem.html">
                     <div class="card m-2" style="width: 19rem">
                         <img alt="shoe" class="card-img-top" src="{{asset('./images/shoe2.jpeg')}}">
                         <div class="card-body">
@@ -162,8 +164,9 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </a>-->
             </div>
+            {{$products->links()}}
         </section>
     </div>
 @endsection
