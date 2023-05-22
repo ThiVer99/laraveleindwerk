@@ -17,7 +17,7 @@ class ProductCategorySeeder extends Seeder
     public function run()
     {
         //
-        $productcategories = ['elektro','tuin','sport'];
+        $productcategories = ['lifestyle','hardlopen','sport'];
         foreach ($productcategories as $productcategorie) {
             ProductCategory::create([
                 'name' => $productcategorie,

@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::get('/',[HomeController::class,'index'])->name('frontend.home');
 Route::get("/shop", [ShopController::class, "index"])->name("frontend.shop");
+Route::get('/shop/{id}', [ShopController::class, 'show'])->name('frontend.show');
 Route::get("/cart", [CartController::class, "index"])->name("frontend.cart");
 Route::get('contactformulier',[ContactController::class,'create'])->name('contact.create');
 Route::post('contactformulier',[ContactController::class,'store'])->name('contact.store');

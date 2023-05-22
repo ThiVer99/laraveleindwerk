@@ -28,7 +28,7 @@ class PhotoFactory extends Factory
         }
         return [
             'file' => function () {
-                $imageUrl = 'https://source.unsplash.com/category/nature/640x480';
+                $imageUrl = 'https://source.unsplash.com/featured/640x480';
                 $imageData = file_get_contents($imageUrl);
                 $filename = 'posts/' . uniqid() . '.jpg';
                 Storage::disk('public')->put($filename, $imageData);

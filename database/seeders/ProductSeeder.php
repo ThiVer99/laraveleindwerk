@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
             $product->body = fake()->paragraphs(3, true);
             $product->photo_id = $photos->random()->id;
             $product->brand_id = $brands->random()->id;
-            $product->price = fake()->randomDigit();
+            $product->price = fake()->randomNumber(3,false);
             $product->men = fake()->boolean;
             $product->women = fake()->boolean;
             $product->save();

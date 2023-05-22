@@ -10,7 +10,13 @@ class ShopController extends Controller
     //
     public function index()
     {
-        $products = Product::paginate(18);
+        $products = Product::with('photo')->paginate(18);
         return view("shop", compact('products'));
+    }
+
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return view("shopItem", compact('product'));
     }
 }

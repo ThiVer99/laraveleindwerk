@@ -104,7 +104,7 @@
             </div>
             <div class="col-12 col-lg-10 d-flex flex-wrap justify-content-center" id="content">
                 @foreach($products as $product)
-                <a class="text-decoration-none text-black" href="shopItem.html">
+                <a class="text-decoration-none text-black" href="{{route('frontend.show',$product->id)}}">
                     <div class="card m-2" style="width: 19rem">
                         <img alt="shoe" class="card-img-top" src="{{asset($product->photo->file)}}">
                         <div class="card-body">
