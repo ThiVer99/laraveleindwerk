@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean("men");
             $table->boolean("women");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

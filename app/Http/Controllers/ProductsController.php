@@ -209,6 +209,14 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            $post = Product::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Post not found.'], 404);
+        }
+
+        $post->delete();
+        return redirect()->route('products.index')->with('message', 'Post deleted!');
     }
 
     public function productsPerBrand($id)
