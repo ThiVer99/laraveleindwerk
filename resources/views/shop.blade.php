@@ -14,6 +14,33 @@
                 </header>
                 <hr>
                 <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <!-- start brands -->
+                    <div class="accordion-item">
+                        <p class="accordion-header ff-rmv" id="flush-headingFour">
+                            <button aria-controls="flush-collapseFour" aria-expanded="false"
+                                    class="accordion-button collapsed ps-0"
+                                    data-bs-target="#flush-collapseFour" data-bs-toggle="collapse"
+                                    type="button">
+                                Brand
+                            </button>
+                        </p>
+                        <div aria-labelledby="flush-headingFour" class="accordion-collapse collapse"
+                             data-bs-parent="#accordionFlushExample"
+                             id="flush-collapseFour">
+                            <div class="accordion-body">
+                                @foreach($brands as $brand)
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="brand{{$brand->id}}" type="checkbox"
+                                               value="option{{$brand->id}}">
+                                        <label class="ff-rmv" for="brand{{$brand->id}}">{{$brand->name}}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end brands -->
+                    <!-- start price -->
+
                     <div class="accordion-item">
                         <p class="accordion-header ff-rmv" id="flush-headingOne">
                             <button aria-controls="flush-collapseOne" aria-expanded="false"
@@ -25,10 +52,12 @@
                         <div aria-labelledby="flush-headingOne" class="accordion-collapse collapse"
                              data-bs-parent="#accordionFlushExample"
                              id="flush-collapseOne">
-                            <div class="accordion-body"><input class="form-range" id="customRange3" step="1" type="range">
+                            <div class="accordion-body"><input class="form-range" id="customRange3" step="1"
+                                                               type="range">
                             </div>
                         </div>
                     </div>
+                    <!-- end price -->
                     <div class="accordion-item">
                         <p class="accordion-header ff-rmv" id="flush-headingTwo">
                             <button aria-controls="flush-collapseTwo" aria-expanded="false"
@@ -104,20 +133,20 @@
             </div>
             <div class="col-12 col-lg-10 d-flex flex-wrap justify-content-center" id="content">
                 @foreach($products as $product)
-                <a class="text-decoration-none text-black" href="{{route('frontend.show',$product->id)}}">
-                    <div class="card m-2" style="width: 19rem">
-                        <img alt="shoe" class="card-img-top" src="{{asset($product->photo->file)}}">
-                        <div class="card-body">
-                            <h3 class="card-title">{{$product->name}}</h3>
-                            <p class="card-text">&euro; {{$product->price}}</p>
-                            <div class="py-3">
-                                <a class="btn-add-cart" href="shoppingCart.html">Add to Cart</a>
+                    <a class="text-decoration-none text-black" href="{{route('frontend.show',$product->id)}}">
+                        <div class="card m-2" style="width: 19rem">
+                            <img alt="shoe" class="card-img-top" src="{{asset($product->photo->file)}}">
+                            <div class="card-body">
+                                <h3 class="card-title">{{$product->name}}</h3>
+                                <p class="card-text">&euro; {{$product->price}}</p>
+                                <div class="py-3">
+                                    <a class="btn-add-cart" href="shoppingCart.html">Add to Cart</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 @endforeach
-<!--                <a class="text-decoration-none text-black" href="shopItem.html">
+                <!--                <a class="text-decoration-none text-black" href="shopItem.html">
                     <div class="card m-2" style="width: 19rem">
                         <img alt="shoe" class="card-img-top" src="{{asset('./images/shoe2.jpeg')}}">
                         <div class="card-body">

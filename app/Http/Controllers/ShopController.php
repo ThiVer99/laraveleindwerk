@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class ShopController extends Controller
     public function index()
     {
         $products = Product::with('photo')->paginate(18);
-        return view("shop", compact('products'));
+        $brands = Brand::all();
+        return view("shop", compact('products','brands'));
     }
 
     public function show($id)
