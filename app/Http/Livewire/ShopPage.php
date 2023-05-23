@@ -6,9 +6,13 @@ use App\Models\Brand;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShopPage extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public function render()
     {
         $products = Product::with('photo')->paginate(18);

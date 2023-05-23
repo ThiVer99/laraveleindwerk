@@ -11,8 +11,8 @@ class CartController extends Controller
     //
     public function index()
     {
-        $products = Product::all();
-        return view("cart", compact('products'));
+        $cartItems = Cart::content();
+        return view("cart",compact('cartItems'));
     }
 
     public function store(Request $request){

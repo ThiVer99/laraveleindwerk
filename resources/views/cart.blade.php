@@ -5,15 +5,16 @@
             <div class="col-12 col-lg-8 ff-rmv">
                 <h2>My cart</h2>
                 <hr>
-                <div class="row py-4 position-relative">
+                @foreach($cartItems as $cartItem)
+                    <div class="row py-4 position-relative">
                     <div class="col-4 col-lg-2">
-                        <a href="shopItem.html">
+                        <a href="{{ route('frontend.show',$cartItem->id) }}">
                             <img alt="shoe" class="img-fluid border-cart-item" src="{{asset('./images/shoe1.png')}}">
                         </a>
                     </div>
                     <div class="col-8 col-lg-5 row align-items-center">
-                        <p>Name: Nike Air Jordan</p>
-                        <p>Price: € 119,00</p>
+                        <p>{{ $cartItem->name }}</p>
+                        <p>Price: € {{ $cartItem->price }}</p>
                         <p>Size: 43</p>
                         <p class="m-0">Color: Black and Red</p>
                     </div>
@@ -33,6 +34,7 @@
                         <button class="btn-delete">X</button>
                     </div>
                 </div>
+                @endforeach
                 <hr>
             </div>
             <div class="col-12 col-lg-4 ff-rmv">
