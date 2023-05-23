@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -11,14 +12,13 @@ class ShopController extends Controller
     //
     public function index()
     {
-        $products = Product::with('photo')->paginate(18);
-        $brands = Brand::all();
-        return view("shop", compact('products','brands'));
+        return view("shop");
     }
 
     public function show($id)
     {
         $product = Product::findOrFail($id);
-        return view("shopItem", compact('product'));
+        $cart = Cart::content();
+        return view("shopItem", compact('product','cart'));
     }
 }

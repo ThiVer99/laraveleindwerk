@@ -15,7 +15,7 @@
                     <a class="nav-link ff-rmv" href="{{route('frontend.shop')}}">Shop</a>
                 </li>
                 <li class="nav-item ps-4">
-                    <a class="nav-link" href="{{route('frontend.cart')}}"><i class="bi bi-bag-fill"></i></a>
+                    @livewire('cart-counter')
                 </li>
                 @can('admin')
                 <li class="nav-item ps-4">

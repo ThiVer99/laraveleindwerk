@@ -29,7 +29,15 @@
             <option value="green/black">Green and Black</option>
         </select>
         <p class="py-4">{{$product->body}}</p>
-        <a class="btn-add-cart" href="shoppingCart.html">Add to Cart</a>
+        @if($cart->where('id',$product->id)->count())
+            <p>In cart</p>
+        @else
+            <form action="{{route('cart.store')}}" method="POST">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <button type="submit" class="btn-add-cart">Add to Cart</button>
+            </form>
+        @endif
     </div>
 </div>
 @endsection
