@@ -5,11 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Brand;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ShopPage extends Component
 {
+    use LivewireAlert;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -29,8 +31,13 @@ class ShopPage extends Component
             $product->name,
             1,
             $product->price
-        );
+        )->associate('App\Models\Product');
 
         $this->emit('cart_updated');
+        $this->alert('success', $product->name .' added to cart!', [
+            'position' => 'center',
+            'timer' => 2500,
+            'toast' => true,
+        ]);
     }
 }

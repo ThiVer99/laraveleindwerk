@@ -6,13 +6,13 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
+
 class CartController extends Controller
 {
     //
     public function index()
     {
-        $cartItems = Cart::content();
-        return view("cart",compact('cartItems'));
+        return view("cart");
     }
 
     public function store(Request $request){
@@ -22,8 +22,9 @@ class CartController extends Controller
             $product->name,
             1,
             $product->price
-        );
+        )->associate('App\Models\Product');
 
         return redirect()->back()->with('message','Successfully added!');
+
     }
 }

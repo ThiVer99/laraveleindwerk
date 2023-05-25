@@ -51,6 +51,8 @@
     </div>
     <p class="text-white text-center py-5">&copy;2022 by Thibo Vervaecke</p>
 </footer>
+<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+<x-livewire-alert::flash />
 <script crossorigin="anonymous"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
