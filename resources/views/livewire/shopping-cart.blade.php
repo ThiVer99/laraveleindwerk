@@ -13,17 +13,20 @@
                                          src="{{$cartItem->model->photo->file}}">
                                 </a>
                             </div>
-                            <div class="col-8 col-lg-5 row align-items-center">
+                            <div class="col-8 col-lg-4 row align-items-center">
                                 <p>{{ $cartItem->name }}</p>
                                 <p>Price: &euro; {{ $cartItem->price }}</p>
                                 <p>Size: 43</p>
                                 <p class="m-0">Color: Black and Red</p>
                             </div>
-                            <div class="col-4 offset-4 offset-lg-0 col-lg-2 py-3 py-lg-0">
-                                <input wire:change="changeQuantity('{{$cartItem->rowId}}',{{$cartItem->id}})" wire:model="quantity.{{$cartItem->id}}" class="form-control" type="number" value="1" min="1">
+                            <div class="col-4 offset-4 offset-lg-0 col-lg-3 py-3 py-lg-0">
+                                <div class="d-flex align-items-center">
+                                    <label>quantity: </label>
+                                    <input wire:change="changeQuantity('{{$cartItem->rowId}}',{{$cartItem->id}})" wire:model="quantity.{{$cartItem->id}}" class="form-control ms-2" type="number" min="1">
+                                </div>
                             </div>
                             <div class="col-4 col-lg-2 py-3 py-lg-0">
-                                <p>&euro; {{ $cartItem->price }}</p>
+                                <p>&euro; {{ $cartItem->price * $cartItem->qty}}</p>
                             </div>
                             <div class="col-2 offset-9 offset-lg-0 col-lg-1 cart-delete">
                                 <button wire:click="remove('{{$cartItem->rowId}}')" type="submit" class="btn-delete">X

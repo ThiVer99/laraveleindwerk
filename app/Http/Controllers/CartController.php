@@ -6,7 +6,6 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
-
 class CartController extends Controller
 {
     //
@@ -25,6 +24,5 @@ class CartController extends Controller
         )->associate('App\Models\Product');
 
         return redirect()->back()->with('message','Successfully added!');
-
     }
 }

@@ -31,7 +31,7 @@ class ShoppingCart extends Component
     public function remove($rowId){
         Cart::remove($rowId);
         $this->emit('cart_updated');
-        $this->alert('warning', 'Product deleted!', [
+        $this->alert('error', 'Product deleted!', [
             'position' => 'center',
             'timer' => 3000,
             'toast' => true,
