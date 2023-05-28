@@ -64,9 +64,10 @@
                         <h5>Total:</h5>
                         <p>&euro;{{$total}}</p>
                     </div>
-                    <a href="checkoutAdres.html">
+                    <form action="{{route('frontend.checkout')}}" method="POST">
+                        @csrf
                         <button class="btn-checkout mb-4">Checkout</button>
-                    </a>
+                    </form>
                     <div class="accordion" id="accordionExample">
                         <div class="discount-dropdown">
                             <h2 class="accordion-header" id="headingOne">

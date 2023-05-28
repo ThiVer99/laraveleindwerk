@@ -15,7 +15,8 @@
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.3",
         "livewire/livewire": "^2.12",
-        "openai-php/client": "^0.4.1"
+        "openai-php/client": "^0.4.1",
+        "stripe/stripe-php": "^10.14"
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.7",

@@ -38,6 +38,12 @@ Route::get("/shop", [ShopController::class, "index"])->name("frontend.shop");
 Route::get('/shop/{id}', [ShopController::class, 'show'])->name('frontend.show');
 Route::post('/', [CartController::class, 'store'])->name('cart.store');
 Route::get("/cart", [CartController::class, "index"])->name("frontend.cart");
+
+Route::post("/checkout", [CartController::class, "checkout"])->name("frontend.checkout");
+Route::get("/success", [CartController::class, "success"])->name("frontend.checkout.success");
+Route::get("/cancel", [CartController::class, "cancel"])->name("frontend.checkout.cancel");
+Route::post("/webhook",[CartController::class,'webhook'])->name('frontend.checkout.webhook');
+
 Route::get('contactformulier', [ContactController::class, 'create'])->name('contact.create');
 Route::post('contactformulier', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/post/{post:slug}', [AdminPostsController::class, 'post'])->name('frontend.post');
