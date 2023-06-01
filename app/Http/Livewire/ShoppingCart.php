@@ -16,7 +16,7 @@ class ShoppingCart extends Component
     public function mount(){
         $this->products = Cart::content();
         foreach ($this->products as $product){
-            $this->quantity[$product->id] = 1;
+            $this->quantity[$product->id] = $product->qty;
         }
     }
 
