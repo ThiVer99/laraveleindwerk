@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Gender;
 use App\Models\Keyword;
 use App\Models\Photo;
 use App\Models\Product;
@@ -16,14 +17,15 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
         //
         $brands = Brand::all();
-        $products = Product::with(['keywords', 'photo', 'brand', 'productcategories'])->paginate(10);
-        return view('admin.products.index', compact('products', 'brands'));
+        $genders = Gender::all();
+        $products = Product::with(['keywords', 'photo', 'brand', 'productcategories','gender'])->orderByDesc('created_at')->paginate(10);
+        return view('admin.products.index', compact('products', 'brands','genders'));
     }
 
     /**
@@ -37,7 +39,8 @@ class ProductsController extends Controller
         $keywords = Keyword::all();
         $productcategories = ProductCategory::all();
         $brands = Brand::all();
-        return view('admin.products.create', compact('keywords', 'productcategories', 'brands'));
+        $genders = Gender::all();
+        return view('admin.products.create', compact('keywords', 'productcategories', 'brands','genders'));
     }
 
     /**
@@ -56,8 +59,8 @@ class ProductsController extends Controller
             'price' => 'required|numeric|between:0,999999.99',
             'keywords' => ['required', Rule::exists('keywords', 'id')],
             'body' => 'required',
-            'gender' => 'required|min:1',
-            'photo_id' => 'required'
+            'photo_id' => 'required',
+            'gender_id' => 'required'
         ],
             [
                 'name.required' => 'Product name is required',
@@ -66,27 +69,15 @@ class ProductsController extends Controller
                 'body.required' => 'Message is required',
                 'productcategories.required' => 'Select at least one category',
                 'keywords.required' => 'Please check minimum one keyword',
-                'gender.required' => 'select at least 1 gender or both',
-                'photo_id.required' => 'Upload a picture of the product'
-
+                'photo_id.required' => 'Upload a picture of the product',
+                'gender_id.required' => 'Please select a gender'
             ]);
         $product = new Product();
         $product->name = $request->name;
         $product->brand_id = $request->brand_id;
         $product->body = $request->body;
         $product->price = $request->price;
-
-        if (in_array('men', $request->get('gender'))) {
-            $product->men = 1;
-        } else {
-            $product->men = 0;
-        }
-        if (in_array('women', $request->get('gender'))) {
-            $product->women = 1;
-        } else {
-            $product->women = 0;
-        }
-
+        $product->gender_id = $request->gender_id;
 
         if ($file = $request->file("photo_id")) {
             $path = request()
@@ -131,7 +122,7 @@ class ProductsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
@@ -139,7 +130,8 @@ class ProductsController extends Controller
         $brands = Brand::all();
         $product = Product::findOrFail($id);
         $productCategories = ProductCategory::all();
-        return view('admin.products.edit', compact('product', 'productCategories', 'brands'));
+        $genders = Gender::all();
+        return view('admin.products.edit', compact('product', 'productCategories', 'brands','genders'));
     }
 
     /**
@@ -155,11 +147,12 @@ class ProductsController extends Controller
         request()->validate([
             'name' => ['required', 'between:2,255'],
             'price' => 'required|numeric|between:0,999999.99',
-            'gender' => 'required|min:1',
+            'gender_id' => 'required',
             'body' => 'required'
         ], [
             'name.required' => 'name is required',
-            'name.between' => 'Name between 2 and 255 characters required'
+            'name.between' => 'Name between 2 and 255 characters required',
+            'gender_id.required' => 'Select a Gender'
         ]);
         $product = Product::findOrFail($id);
         $input = $request->all();
@@ -179,16 +172,7 @@ class ProductsController extends Controller
             }
         }
 
-        if (in_array('men', $input['gender'])) {
-            $product->men = 1;
-        } else {
-            $product->men = 0;
-        }
-        if (in_array('women', $input['gender'])) {
-            $product->women = 1;
-        } else {
-            $product->women = 0;
-        }
+        $product->gender_id = $request->gender_id;
         $product->brand_id = $request->brand_id;
         $product->update($input);
         $product->productCategories()->sync($request->categories, true);
@@ -223,27 +207,6 @@ class ProductsController extends Controller
     {
         $brands = Brand::all();
         $products = Product::where('brand_id', $id)->with(['keywords', 'photo', 'brand', 'productcategories'])->paginate(10);
-        return view('admin.products.index', compact('products', 'brands'));
-    }
-
-    public function productsPerGenderMen()
-    {
-        $brands = Brand::all();
-        $products = Product::where('men', 1)->where('women', 0)->with(['keywords', 'photo', 'brand', 'productcategories'])->paginate(10);
-        return view('admin.products.index', compact('products', 'brands'));
-    }
-
-    public function productsPerGenderWomen()
-    {
-        $brands = Brand::all();
-        $products = Product::where('men', 0)->where('women', 1)->with(['keywords', 'photo', 'brand', 'productcategories'])->paginate(10);
-        return view('admin.products.index', compact('products', 'brands'));
-    }
-
-    public function productsPerGenderUnisex()
-    {
-        $brands = Brand::all();
-        $products = Product::where('men', 1)->where('women', 1)->with(['keywords', 'photo', 'brand', 'productcategories'])->paginate(10);
         return view('admin.products.index', compact('products', 'brands'));
     }
 }

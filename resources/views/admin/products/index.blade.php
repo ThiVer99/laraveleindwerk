@@ -15,10 +15,12 @@
                 @endforeach
             </div>
         </div>
-        <div class="d-flex">
-            <a href="{{route('products.perGenderMen')}}">Men</a>
-            <a href="{{route('products.perGenderWomen')}}">Women</a>
-            <a href="{{route('products.perGenderUnisex')}}">Unisex</a>
+        <div class="d-flex align-items-center">
+            <select class="form-control" name="gender-select" id="gender-select">
+                @foreach($genders as $gender)
+                    <option value="{{$gender->id}}">{{$gender->name}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="d-flex">
             <a href="{{route('products.index')}}" class="btn btn-primary m-2 rounded-pill">All Products</a>
@@ -59,15 +61,7 @@
                 <td>{{$product->name}}</td>
                 <td>{{Str::limit($product->body,20)}}</td>
                 <td>
-                    @if($product->men == 1 && $product->women == 0)
-                        Men
-                    @endif
-                    @if($product->women == 1 && $product->men == 0)
-                        Women
-                    @endif
-                    @if($product->women == 1 && $product->men == 1 || $product->women == 0 && $product->men == 0)
-                        Unisex
-                    @endif
+                    {{$product->gender->name}}
                 </td>
                 <td>
                     @foreach($product->productcategories as $productcategory)

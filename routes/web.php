@@ -70,9 +70,6 @@ Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified']], functi
     //Product Routes
     Route::resource('products', ProductsController::class);
     Route::get('products/brand/{id}', [ProductsController::class, 'productsPerBrand'])->name('admin.productsPerBrand');
-    Route::get('products/gender/men', [ProductsController::class, 'productsPerGenderMen'])->name('products.perGenderMen');
-    Route::get('products/gender/women', [ProductsController::class, 'productsPerGenderWomen'])->name('products.perGenderWomen');
-    Route::get('products/gender/unisex', [ProductsController::class, 'productsPerGenderUnisex'])->name('products.perGenderUnisex');
     Route::resource('brands', BrandsController::class);
     Route::resource('productcategories', ProductCategoryController::class);
 

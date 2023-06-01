@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Brand;
+use App\Models\Gender;
 use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,6 +21,7 @@ class ProductSeeder extends Seeder
         //
         $brands = Brand::all();
         $photos = Photo::all();
+        $genders = Gender::all();
         for ($i = 0; $i < 100; $i++) {
             $product = new Product();
             $product->name = fake()->words(2, true);
@@ -27,8 +29,7 @@ class ProductSeeder extends Seeder
             $product->photo_id = $photos->random()->id;
             $product->brand_id = $brands->random()->id;
             $product->price = fake()->randomNumber(3,false);
-            $product->men = fake()->boolean;
-            $product->women = fake()->boolean;
+            $product->gender_id = $genders->random()->id;
             $product->save();
         }
     }

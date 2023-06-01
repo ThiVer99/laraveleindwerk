@@ -65,19 +65,18 @@
                     @enderror
                     </div>
                     <!-- GENDERS -->
-                    <div class="form-group mb3">
-                        <label>Gender</label>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="men" value="men" name="gender[]" @if($product->men == 1) checked @endif>
-                            <label class="form-check-label" for="men">Men</label>
+                    <div class="form-group mb-3 d-flex flex-column">
+                        <label>Genders</label>
+                        <div class="btn-group-vertical">
+                            @foreach($genders as $gender)
+                                <label>
+                                    <input type="radio" name="gender_id" value="{{ $gender->id }}"
+                                           autocomplete="off" @if($product->gender_id == $gender->id) checked @endif> {{ $gender->name }}
+                                </label>
+                            @endforeach
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="women" value="women" name="gender[]" @if($product->women == 1) checked @endif>
-                            <label class="form-check-label" for="women">Women</label>
-                        </div>
-                        @error('gender')
-                        <p class="text-danger fs-6">{{$message}}</p>
+                        @error('gender_id')
+                        <p class="text-danger fs-6">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
