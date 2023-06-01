@@ -21,11 +21,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
-        $brands = Brand::all();
-        $genders = Gender::all();
-        $products = Product::with(['keywords', 'photo', 'brand', 'productcategories','gender'])->orderByDesc('created_at')->paginate(10);
-        return view('admin.products.index', compact('products', 'brands','genders'));
+        //variabelen worden ingeladen op livercomponent AdminProducts
+        return view('admin.products.index');
     }
 
     /**
