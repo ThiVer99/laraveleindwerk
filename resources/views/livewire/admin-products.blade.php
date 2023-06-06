@@ -21,6 +21,22 @@
                     @endforeach
                 </select>
             </div>
+            <div class="d-flex align-items-center p-2">
+                <select wire:model="colorSelect" class="form-control" name="color-select" id="color-select">
+                    <option value="">All Colors</option>
+                    @foreach($colors as $color)
+                        <option value="{{$color->id}}">{{$color->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="d-flex align-items-center p-2">
+                <select wire:model="sizeSelect" class="form-control" name="size-select" id="size-select">
+                    <option value="">All Size's</option>
+                    @foreach($sizes as $size)
+                        <option value="{{$size->id}}">{{$size->name}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="d-flex">
@@ -45,6 +61,8 @@
             <th>Body</th>
             <th>Gender</th>
             <th>Categories</th>
+            <th>Colors</th>
+            <th>Size's</th>
             <th>Price</th>
             <th>Created</th>
             <th>Updated</th>
@@ -66,9 +84,19 @@
                 </td>
                 <td>
                     @foreach($product->productcategories as $productcategory)
-                        <span class="badge badge-pill badge-warning">
+                        <span class="badge badge-pill badge-secondary">
                                 {{$productcategory->name}}
                             </span>
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($product->colors as $color)
+                        <span class="badge rounded-pill badge-secondary">{{$color->name}}</span>
+                    @endforeach
+                </td>
+                <td>
+                    @foreach($product->sizes as $size)
+                        <span class="badge rounded-pill badge-secondary">{{$size->name}}</span>
                     @endforeach
                 </td>
                 <td>&euro;{{ $product->price }}</td>
