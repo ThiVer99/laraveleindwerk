@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminCategoriesController;
+use App\Http\Controllers\AdminGendersController;
 use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\BackendController;
-use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\AdminBrandsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
@@ -70,7 +71,8 @@ Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified']], functi
     //Product Routes
     Route::resource('products', ProductsController::class);
     Route::get('products/brand/{id}', [ProductsController::class, 'productsPerBrand'])->name('admin.productsPerBrand');
-    Route::resource('brands', BrandsController::class);
+    Route::resource('brands', AdminBrandsController::class);
+    Route::resource('genders', AdminGendersController::class);
     Route::resource('productcategories', ProductCategoryController::class);
 
     Route::group(["middleware" => 'admin'], function () {

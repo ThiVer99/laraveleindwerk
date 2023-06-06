@@ -6,11 +6,6 @@
             <a href="{{route('brands.index')}}" class="btn btn-primary m-2 rounded-pill">All Brands</a>
         </div>
     </div>
-    @if (session('alert'))
-        <x-alert :type="session('alert')['type']" :message="session('alert')['message']">
-            <x-slot name="title">Brands - </x-slot>
-        </x-alert>
-    @endif
     <div class="row my-2">
         <div class="col-12">
             <form action="{{route('brands.update', $brand->id)}}" method="POST" enctype="multipart/form-data">

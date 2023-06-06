@@ -97,6 +97,7 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
+    <!-- Products -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
            aria-expanded="true" aria-controls="collapseProducts">
@@ -111,6 +112,7 @@
             </div>
         </div>
     </li>
+    <!-- Brands -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBrands"
            aria-expanded="true" aria-controls="collapseBrands">
@@ -125,6 +127,7 @@
             </div>
         </div>
     </li>
+    <!-- Product Categories -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProductcategories"
            aria-expanded="true" aria-controls="collapseProductcategories">
@@ -136,6 +139,21 @@
                 <h6 class="collapse-header">Links:</h6>
                 <a class="collapse-item" href="{{route('productcategories.index')}}">All Product Categories</a>
                 <a class="collapse-item" href="{{route('productcategories.create')}}">Create Product Category</a>
+            </div>
+        </div>
+    </li>
+    <!-- Genders -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGenders"
+           aria-expanded="true" aria-controls="collapseGenders">
+            <i class="fas fa-tags"></i>
+            <span>Genders</span>
+        </a>
+        <div id="collapseGenders" class="collapse" aria-labelledby="collapseGenders" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Links:</h6>
+                <a class="collapse-item" href="{{route('genders.index')}}">All genders</a>
+                <a class="collapse-item" href="{{route('genders.create')}}">Create gender</a>
             </div>
         </div>
     </li>

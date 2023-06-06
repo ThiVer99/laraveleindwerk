@@ -6,11 +6,6 @@
             <a href="{{route('products.index')}}" class="btn btn-primary m-2 rounded-pill">All Products</a>
         </div>
     </div>
-    @if (session('alert'))
-        <x-alert :type="session('alert')['type']" :message="session('alert')['message']">
-            <x-slot name="title">Users</x-slot>
-        </x-alert>
-    @endif
     <div class="row my-2">
         <div class="col-6">
             <form action="{{action('App\Http\Controllers\ProductsController@update',$product->id)}}" method="POST"

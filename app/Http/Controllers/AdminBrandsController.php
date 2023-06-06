@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
-class BrandsController extends Controller
+class AdminBrandsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -85,9 +85,13 @@ class BrandsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
         $brand = Brand::findOrFail($id);
         $brand->update($request->all());
-        return redirect()->route('admin.brands');
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -99,5 +103,13 @@ class BrandsController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            $brand = Brand::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'brand not found.'], 404);
+        }
+
+        $brand->delete();
+        return redirect()->route('brands.index');
     }
 }
