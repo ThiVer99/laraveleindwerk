@@ -17,6 +17,7 @@
                   enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
+                <!-- name -->
                 <div class="form-group mb-3">
                     <label for="name">Name:</label>
                     <input name="name" type="text" class="form-control" id="name" placeholder="Name"
@@ -25,6 +26,7 @@
                     <p class="text-danger fs-6">{{$message}}</p>
                     @enderror
                 </div>
+                <!-- price -->
                 <div class="form-group mb-3">
                     <label for="price">Price:</label>
                     <input id="price" name="price" type="number" step="0.01" class="form-control" placeholder="Price"
@@ -33,6 +35,7 @@
                     <p class="text-danger fs-6">{{$message}}</p>
                     @enderror
                 </div>
+                <!-- Brands - categories - genders -->
                 <div class="d-flex justify-content-around border border-1 my-3 py-3 bg-white">
                     <div class="form-group mb-3 d-flex flex-column">
                         <label>Brands:</label>
@@ -40,7 +43,8 @@
                             @foreach($brands as $brand)
                                 <label>
                                     <input type="radio" name="brand_id" value="{{ $brand->id }}"
-                                           autocomplete="off" @if($product->brand_id == $brand->id) checked @endif> {{ $brand->name }}
+                                           autocomplete="off"
+                                           @if($product->brand_id == $brand->id) checked @endif> {{ $brand->name }}
                                 </label>
                             @endforeach
                         </div>
@@ -57,12 +61,13 @@
                                        @if($product->productcategories->contains($productCategory->id))
                                            checked
                                     @endif>
-                                <label class="form-check-label" for="category{{$productCategory->id}}">{{$productCategory->name}}</label>
+                                <label class="form-check-label"
+                                       for="category{{$productCategory->id}}">{{$productCategory->name}}</label>
                             </div>
                         @endforeach
-                    @error('categories')
-                    <p class="text-danger fs-6">{{$message}}</p>
-                    @enderror
+                        @error('categories')
+                        <p class="text-danger fs-6">{{$message}}</p>
+                        @enderror
                     </div>
                     <!-- GENDERS -->
                     <div class="form-group mb-3 d-flex flex-column">
@@ -71,7 +76,8 @@
                             @foreach($genders as $gender)
                                 <label>
                                     <input type="radio" name="gender_id" value="{{ $gender->id }}"
-                                           autocomplete="off" @if($product->gender_id == $gender->id) checked @endif> {{ $gender->name }}
+                                           autocomplete="off"
+                                           @if($product->gender_id == $gender->id) checked @endif> {{ $gender->name }}
                                 </label>
                             @endforeach
                         </div>
@@ -80,15 +86,82 @@
                         @enderror
                     </div>
                 </div>
+                <!-- Colors & Sizes -->
+                <div class="d-flex justify-content-around">
+                    <div class="accordion pt-1 pb-3" id="accordionColors">
+                        <p class="text-lg text-center font-weight-bold">Colors</p>
+                        <div class="card">
+                            <div class="card-header" id="headingColors">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left" type="button"
+                                            data-toggle="collapse"
+                                            data-target="#collapseColors" aria-expanded="true"
+                                            aria-controls="collapseColors">
+                                        Click to expand
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseColors" class="collapse" aria-labelledby="headingColors"
+                                 data-parent="#accordionColors">
+                                <div class="card-body">
+                                    @foreach($colors as $color)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$color->id}}"
+                                                   id="color{{$color->id}}" name="colors[]"
+                                                   @foreach($product->colors as $productColor) @if($productColor->id == $color->id) checked @endif @endforeach >
+                                            <label class="form-check-label"
+                                                   for="color{{$color->id}}">{{$color->name}}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @error('colors')
+                        <p class="text-danger fs-6">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="accordion pt-1 pb-3" id="accordionSizes">
+                        <p class="text-lg text-center font-weight-bold">Sizes</p>
+                        <div class="card">
+                            <div class="card-header" id="headingSizes">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left" type="button"
+                                            data-toggle="collapse"
+                                            data-target="#collapseSizes" aria-expanded="false"
+                                            aria-controls="collapseSizes">
+                                        Click to expand
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseSizes" class="collapse" aria-labelledby="headingSizes"
+                                 data-parent="#accordionSizes">
+                                <div class="card-body">
+                                    @foreach($sizes as $size)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$size->id}}"
+                                                   id="size{{$size->id}}" name="sizes[]"  @foreach($product->sizes as $productSize) @if($productSize->id == $size->id) checked @endif @endforeach>
+                                            <label class="form-check-label" for="size{{$size->id}}">{{$size->name}}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @error('sizes')
+                        <p class="text-danger fs-6">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <!-- Description -->
                 <div class="form-group mb-3">
-                    <label>Body:</label>
-            <textarea name="body" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                      style="height: 100px">{{($product->body)}}
+                    <label>Description:</label>
+                    <textarea name="body" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                              style="height: 100px">{{($product->body)}}
             </textarea>
                     @error('body')
                     <p class="text-danger fs-6">{{$message}}</p>
                     @enderror
                 </div>
+                <!-- File -->
                 <div class="form-group">
                     <input type="file" name="photo_id" id="ChooseFile">
                 </div>

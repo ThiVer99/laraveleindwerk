@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Gender;
 use App\Models\Keyword;
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -37,7 +39,9 @@ class ProductsController extends Controller
         $productcategories = ProductCategory::all();
         $brands = Brand::all();
         $genders = Gender::all();
-        return view('admin.products.create', compact('keywords', 'productcategories', 'brands','genders'));
+        $colors = Color::all();
+        $sizes = Size::all();
+        return view('admin.products.create', compact('keywords', 'productcategories', 'brands', 'genders', 'colors', 'sizes'));
     }
 
     /**
@@ -57,7 +61,9 @@ class ProductsController extends Controller
             'keywords' => ['required', Rule::exists('keywords', 'id')],
             'body' => 'required',
             'photo_id' => 'required',
-            'gender_id' => 'required'
+            'gender_id' => 'required',
+            'colors' => ['required', Rule::exists('colors', 'id')],
+            'sizes' => ['required', Rule::exists('sizes', 'id')],
         ],
             [
                 'name.required' => 'Product name is required',
@@ -67,7 +73,9 @@ class ProductsController extends Controller
                 'productcategories.required' => 'Select at least one category',
                 'keywords.required' => 'Please check minimum one keyword',
                 'photo_id.required' => 'Upload a picture of the product',
-                'gender_id.required' => 'Please select a gender'
+                'gender_id.required' => 'Please select a gender',
+                'colors.required' => 'please select min 1 color',
+                'sizes.required' => 'please select min 1 size',
             ]);
         $product = new Product();
         $product->name = $request->name;
@@ -92,12 +100,15 @@ class ProductsController extends Controller
             $product->keywords()->save($keywordfind);
         }
         /*wegschrijven van meerder productcategorieen in de tussentabel*/
-
         $product->productcategories()->sync($request->productcategories, true);
+
+        //wegschrijven van colors en sizes in de tussentabel
+        $product->colors()->sync($request->colors, true);
+        $product->sizes()->sync($request->sizes, true);
 
         return redirect()->route('products.index')->with([
             'alert' => [
-                'message' => 'Product added',
+                'message' => $request->name . ' added',
                 'type' => 'success'
             ]
         ]);
@@ -128,7 +139,9 @@ class ProductsController extends Controller
         $product = Product::findOrFail($id);
         $productCategories = ProductCategory::all();
         $genders = Gender::all();
-        return view('admin.products.edit', compact('product', 'productCategories', 'brands','genders'));
+        $colors = Color::all();
+        $sizes = Size::all();
+        return view('admin.products.edit', compact('product', 'productCategories', 'brands', 'genders', 'colors', 'sizes'));
     }
 
     /**
@@ -145,11 +158,15 @@ class ProductsController extends Controller
             'name' => ['required', 'between:2,255'],
             'price' => 'required|numeric|between:0,999999.99',
             'gender_id' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'colors' => ['required', Rule::exists('colors', 'id')],
+            'sizes' => ['required', Rule::exists('sizes', 'id')],
         ], [
             'name.required' => 'name is required',
             'name.between' => 'Name between 2 and 255 characters required',
-            'gender_id.required' => 'Select a Gender'
+            'gender_id.required' => 'Select a Gender',
+            'colors.required' => 'please select min 1 color',
+            'sizes.required' => 'please select min 1 size',
         ]);
         $product = Product::findOrFail($id);
         $input = $request->all();
@@ -173,6 +190,8 @@ class ProductsController extends Controller
         $product->brand_id = $request->brand_id;
         $product->update($input);
         $product->productCategories()->sync($request->categories, true);
+        $product->colors()->sync($request->colors, true);
+        $product->sizes()->sync($request->sizes, true);
         return redirect('/admin/products')->with([
             'alert' => [
                 'message' => 'Product updated',
