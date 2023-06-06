@@ -28,4 +28,10 @@ class Product extends Model
     public function productcategories(){
         return $this->belongsToMany(ProductCategory::class,'product_productcategory','product_id', 'productcategory_id');
     }
+    public function colors(){
+        return $this->belongsToMany(Color::class,'product_color');
+    }
+    public function sizes(){
+        return $this->belongsToMany(Size::class,'product_size');
+    }
 }
