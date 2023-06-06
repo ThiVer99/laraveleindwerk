@@ -2,11 +2,11 @@
 @section('content')
     <div class="d-flex justify-content-between shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <div class="d-flex">
-            <p class="rounded bg-danger m-0 d-flex align-self-center p-2 text-white">{{$genders->total()}}</p>
-            <h1 class="m-0">| Genders</h1>
-            <a href="{{route('genders.index')}}" class="btn btn-primary m-2 rounded-pill">All Genders</a>
+            <p class="rounded bg-danger m-0 d-flex align-self-center p-2 text-white">{{$colors->total()}}</p>
+            <h1 class="m-0">| Colors</h1>
+            <a href="{{route('colors.index')}}" class="btn btn-primary m-2 rounded-pill">All colors</a>
         </div>
-        <a href="{{route('genders.create')}}" class="btn btn-primary m-2 rounded-pill">Add Gender</a>
+        <a href="{{route('colors.create')}}" class="btn btn-primary m-2 rounded-pill">Add color</a>
 
 
     </div>
@@ -21,15 +21,15 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($genders as $gender)
+        @foreach($colors as $color)
             <tr>
-                <td>{{$gender->id}}</td>
-                <td>{{$gender->name}}</td>
-                <td>{{$gender->created_at ? $gender->created_at->diffForHumans() : ''}}</td>
-                <td>{{$gender->updated_at ? $gender->updated_at->diffForHumans() : ''}}</td>
+                <td>{{$color->id}}</td>
+                <td>{{$color->name}}</td>
+                <td>{{$color->created_at ? $color->created_at->diffForHumans() : ''}}</td>
+                <td>{{$color->updated_at ? $color->updated_at->diffForHumans() : ''}}</td>
                 <td>
                     <div class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown{{ $gender->id }}" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown{{ $color->id }}" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                 <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
@@ -37,15 +37,15 @@
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu  shadow "
-                             aria-labelledby="userDropdown{{ $gender->id }}">
-                            <a class="dropdown-item" href="{{route('genders.edit', $gender->id)}}">
+                             aria-labelledby="userDropdown{{ $color->id }}">
+                            <a class="dropdown-item" href="{{route('colors.edit', $color->id)}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                     <path
                                         d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                                 </svg>
                                 Edit
                             </a>
-                            <form action="{{ route('genders.destroy', $gender->id) }}" method="POST">
+                            <form action="{{ route('colors.destroy', $color->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="dropdown-item">
@@ -63,7 +63,7 @@
         @endforeach
         </tbody>
     </table>
-    {{ $genders->links() }}
+    {{ $colors->links() }}
 @endsection
 
 

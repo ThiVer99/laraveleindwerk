@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gender;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
-class AdminGendersController extends Controller
+class AdminSizesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class AdminGendersController extends Controller
      */
     public function index()
     {
-        $genders = Gender::paginate(10);
-        return view('admin.genders.index', compact('genders'));
+        $sizes = Size::paginate(10);
+        return view('admin.sizes.index', compact('sizes'));
     }
 
     /**
@@ -25,7 +25,7 @@ class AdminGendersController extends Controller
      */
     public function create()
     {
-        return view('admin.genders.create');
+        return view('admin.sizes.create');
     }
 
     /**
@@ -37,12 +37,14 @@ class AdminGendersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'name' => 'required'
-        ],[
-            'name.required' => 'Please enter a name'
+            'name' => 'required|integer|min:1'
+        ], [
+            'name.required' => 'Please enter a shoe size',
+            'name.integer' => 'Please enter a number',
+            'name.min:1' => 'Please enter a number that is 1 or higher',
         ]);
-        Gender::create($request->all());
-        return redirect()->route('genders.index');
+        Size::create($request->all());
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -60,12 +62,12 @@ class AdminGendersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $gender = Gender::findOrFail($id);
-        return view('admin.genders.edit',compact('gender'));
+        $size = Size::findOrFail($id);
+        return view('admin.sizes.edit',compact('size'));
     }
 
     /**
@@ -73,19 +75,20 @@ class AdminGendersController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required'
-        ],[
-            'name.required' => 'Please enter a name'
+            'name' => 'required|integer|min:1'
+        ], [
+            'name.required' => 'Please enter a shoe size',
+            'name.integer' => 'Please enter a number',
+            'name.min:1' => 'Please enter a number that is 1 or higher',
         ]);
-
-        $gender = Gender::findOrFail($id);
-        $gender->update($request->all());
-        return redirect()->route('genders.index');
+        $size = Size::findOrFail($id);
+        $size->update($request->all());
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -96,13 +99,6 @@ class AdminGendersController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $gender = Gender::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'gender not found.'], 404);
-        }
-
-        $gender->delete();
-        return redirect()->route('genders.index');
+        //
     }
 }

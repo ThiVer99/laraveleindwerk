@@ -157,6 +157,36 @@
             </div>
         </div>
     </li>
+    <!-- Colors -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColors"
+           aria-expanded="true" aria-controls="collapseColors">
+            <i class="fas fa-palette"></i>
+            <span>Colors</span>
+        </a>
+        <div id="collapseColors" class="collapse" aria-labelledby="collapseColors" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Links:</h6>
+                <a class="collapse-item" href="{{route('colors.index')}}">All colors</a>
+                <a class="collapse-item" href="{{route('colors.create')}}">Create color</a>
+            </div>
+        </div>
+    </li>
+    <!-- Size -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSizes"
+           aria-expanded="true" aria-controls="collapseSizes">
+            <i class="fas fa-shoe-prints"></i>
+            <span>Sizes</span>
+        </a>
+        <div id="collapseSizes" class="collapse" aria-labelledby="collapseSizes" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Links:</h6>
+                <a class="collapse-item" href="{{route('sizes.index')}}">All sizes</a>
+                <a class="collapse-item" href="{{route('sizes.create')}}">Create size</a>
+            </div>
+        </div>
+    </li>
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
