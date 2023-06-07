@@ -8,7 +8,8 @@
                 @csrf
                 <label class="text-white ff-rmv" for="email">E-mail:</label>
                 <input placeholder="Email" class="my-2 form-control login-input @error('email') is-invalid @enderror"
-                       id="email" type="email" value="{{ old('email') }}" required autocomplete="email" name="email" autofocus>
+                       id="email" type="email" value="{{ old('email') }}" required autocomplete="email" name="email"
+                       autofocus>
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong class="text-warning">{{ $message }}</strong>
@@ -25,6 +26,13 @@
                 @enderror
                 <button type="submit" class="ff-rmv mt-3 btn btn-login">Log In</button>
             </form>
+            <hr>
+            <h3 class="ff-rmv text-center text-white">No account yet?</h3>
+            <div class="text-center pt-2">
+                <a class="btn btn-link text-white" href="{{ route('register') }}">
+                    Click here to register
+                </a>
+            </div>
         </div>
     </section>
 @endsection
