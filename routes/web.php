@@ -56,7 +56,7 @@ Route::get('/itunes', [ItunesController::class, 'index'])->name('itunes.index');
 
 /**backend**/
 
-Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified']], function () {
+Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]], function () {
     Route::get("/", [
         BackendController::class,
         "index",

@@ -152,7 +152,7 @@ class AdminPostsController extends Controller
         //we kijken eerst of er een foto bestaat
         if ($request->hasFile('photo_id')) {
             $oldPhoto = $post->photo; // de huidige foto van de gebruiker
-            $path = request()->file('photo_id')->store('users');
+            $path = request()->file('photo_id')->store('posts');
             if ($oldPhoto) {
                 unlink(public_path($oldPhoto->file));
                 // $oldPhoto->delete();

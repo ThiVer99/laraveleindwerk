@@ -159,12 +159,12 @@
     </li>
     <!-- Colors -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColors"
-           aria-expanded="true" aria-controls="collapseColors">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColorsNav"
+           aria-expanded="true" aria-controls="collapseColorsNav">
             <i class="fas fa-palette"></i>
             <span>Colors</span>
         </a>
-        <div id="collapseColors" class="collapse" aria-labelledby="collapseColors" data-parent="#accordionSidebar">
+        <div id="collapseColorsNav" class="collapse" aria-labelledby="collapseColorsNav" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Links:</h6>
                 <a class="collapse-item" href="{{route('colors.index')}}">All colors</a>
@@ -174,12 +174,12 @@
     </li>
     <!-- Size -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSizes"
-           aria-expanded="true" aria-controls="collapseSizes">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSizesNav"
+           aria-expanded="true" aria-controls="collapseSizesNav">
             <i class="fas fa-shoe-prints"></i>
             <span>Sizes</span>
         </a>
-        <div id="collapseSizes" class="collapse" aria-labelledby="collapseSizes" data-parent="#accordionSidebar">
+        <div id="collapseSizesNav" class="collapse" aria-labelledby="collapseSizesNav" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Links:</h6>
                 <a class="collapse-item" href="{{route('sizes.index')}}">All sizes</a>

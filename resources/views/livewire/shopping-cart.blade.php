@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                             <div class="col-4 col-lg-2 py-3 py-lg-0">
-                                <p>&euro; {{ $cartItem->price * $cartItem->qty}}</p>
+                                <p>&euro; {{ $cartItem->price * $cartItem->qty }}</p>
                             </div>
                             <div class="col-2 offset-9 offset-lg-0 col-lg-1 cart-delete">
                                 <button wire:click="remove('{{$cartItem->rowId}}')" type="submit" class="btn-delete">X
