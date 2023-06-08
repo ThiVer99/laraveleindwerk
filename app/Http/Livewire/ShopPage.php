@@ -51,8 +51,11 @@ class ShopPage extends Component
                 'timer' => 5000,
                 'toast' => false,
                 'showConfirmButton' => true,
+                'showDenyButton' => true,
                 'onConfirmed' => 'loginRedirect',
+                'onDeny' => 'registerRedirect',
                 'confirmButtonText' => 'Login',
+                'denyButtonText' => 'Register'
             ]);
         }
     }
@@ -60,5 +63,8 @@ class ShopPage extends Component
     {
         return redirect()->to('/login');
     }
-
+    public function registerRedirect()
+    {
+        return redirect()->to('/register');
+    }
 }

@@ -285,6 +285,9 @@ footer {
     border-radius: 0;
     border-bottom: 2px solid red;
 }
+div:where(.swal2-container) button:where(.swal2-styled).swal2-deny {
+    background-color: #7066e0;
+}
 /*einde shop-content*/
 /*einde shop*/
 /*begin shop-item*/

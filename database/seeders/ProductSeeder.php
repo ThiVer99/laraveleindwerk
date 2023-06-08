@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $product = new Product();
             $product->name = fake()->words(2, true);
-            $product->body = fake()->paragraphs(3, true);
+            $product->body = fake()->paragraphs(2, true);
             $product->photo_id = $photos->random()->id;
             $product->brand_id = $brands->random()->id;
             $product->price = fake()->randomNumber(3,false);
