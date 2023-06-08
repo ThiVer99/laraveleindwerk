@@ -1,49 +1,54 @@
 <div>
-    <div class="d-flex justify-content-between shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-        <div class="d-flex">
+    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex">
-                <p class="rounded bg-danger m-0 d-flex align-self-center p-2 text-white">{{$products->total()}} </p>
-                <h1 class="m-0"> | Products | </h1>
+                <div class="d-flex">
+                    <p class="rounded bg-danger m-0 d-flex align-self-center p-2 text-white">{{$products->total()}} </p>
+                    <h1 class="m-0"> | Products | </h1>
+                </div>
+                <div class="d-flex align-items-center p-2">
+                    <select wire:model="brandSelect" class="form-control" name="brand-select" id="brand-select">
+                        <option value="">All Brands</option>
+                        @foreach($brands as $brand)
+                            <option value="{{$brand->id}}">{{$brand->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="d-flex align-items-center p-2">
+                    <select wire:model="genderSelect" class="form-control" name="gender-select" id="gender-select">
+                        <option value="">All Genders</option>
+                        @foreach($genders as $gender)
+                            <option value="{{$gender->id}}">{{$gender->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="d-flex align-items-center p-2">
+                    <select wire:model="colorSelect" class="form-control" name="color-select" id="color-select">
+                        <option value="">All Colors</option>
+                        @foreach($colors as $color)
+                            <option value="{{$color->id}}">{{$color->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="d-flex align-items-center p-2">
+                    <select wire:model="sizeSelect" class="form-control" name="size-select" id="size-select">
+                        <option value="">All Size's</option>
+                        @foreach($sizes as $size)
+                            <option value="{{$size->id}}">{{$size->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-            <div class="d-flex align-items-center p-2">
-                <select wire:model="brandSelect" class="form-control" name="brand-select" id="brand-select">
-                    <option value="">All Brands</option>
-                    @foreach($brands as $brand)
-                        <option value="{{$brand->id}}">{{$brand->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="d-flex align-items-center p-2">
-                <select wire:model="genderSelect" class="form-control" name="gender-select" id="gender-select">
-                    <option value="">All Genders</option>
-                    @foreach($genders as $gender)
-                        <option value="{{$gender->id}}">{{$gender->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="d-flex align-items-center p-2">
-                <select wire:model="colorSelect" class="form-control" name="color-select" id="color-select">
-                    <option value="">All Colors</option>
-                    @foreach($colors as $color)
-                        <option value="{{$color->id}}">{{$color->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="d-flex align-items-center p-2">
-                <select wire:model="sizeSelect" class="form-control" name="size-select" id="size-select">
-                    <option value="">All Size's</option>
-                    @foreach($sizes as $size)
-                        <option value="{{$size->id}}">{{$size->name}}</option>
-                    @endforeach
-                </select>
+
+            <div class="d-flex">
+                <a href="{{route('products.index')}}" class="btn btn-primary m-2 rounded-pill">All Products</a>
+                <a href="{{route('products.create')}}" class="btn btn-primary m-2 rounded-pill">Add Product</a>
             </div>
         </div>
-
-        <div class="d-flex">
-            <a href="{{route('products.index')}}" class="btn btn-primary m-2 rounded-pill">All Products</a>
-            <a href="{{route('products.create')}}" class="btn btn-primary m-2 rounded-pill">Add Product</a>
+        <div>
+            <label class="" for="searchProducts">Search:</label>
+            <input id="searchProducts" type="text" class="form-control" wire:model="searchProduct">
         </div>
-
     </div>
     @if (session('alert'))
         <x-alert :type="session('alert')['type']" :message="session('alert')['message']">
