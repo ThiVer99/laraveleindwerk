@@ -204,28 +204,35 @@ class ProductsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         //
         try {
-            $post = Product::findOrFail($id);
+            $product = Product::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'product not found.'], 404);
         }
 
-        $post->delete();
-        return redirect()->route('products.index');
-    }
-    public function productRestore($id){
-        Product::onlyTrashed()->where('id', $id)->restore();
-        // herstel ook alle posts van de gebruiker
-        $product = Product::withTrashed()->where('id', $id)->first();
-        $product->onlyTrashed()->restore();
+        $product->delete();
         return redirect()->route('products.index')->with([
             'alert' => [
-                'message' => 'product restored',
+                'message' => $product->name . ' deleted!',
+                'type' => 'danger'
+            ]
+        ]);
+    }
+    public function productRestore($id){
+        try {
+            Product::onlyTrashed()->where('id', $id)->restore();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'product not found.'], 404);
+        }
+
+        return redirect()->route('products.index')->with([
+            'alert' => [
+                'message' => 'product restored!',
                 'type' => 'success'
             ]
         ]);

@@ -21,7 +21,7 @@ class AdminProducts extends Component
     public $colorSelect;
     public $sizeSelect;
     public $searchProduct;
-
+    public $deleteSelect;
     public function render()
     {
         $brands = Brand::all();
@@ -45,6 +45,9 @@ class AdminProducts extends Component
             $query->whereHas('sizes', function ($query) {
                 $query->where('size_id', $this->sizeSelect);
             });
+        })->when($this->deleteSelect, function ($query) {
+            //als brand wordt aan geklikt dan wordt deze query toegevoegd aan de orignele query
+            $query->whereNotNull('deleted_at');
         })->where('name','LIKE','%' . $this->searchProduct . '%')->withTrashed()->orderByDesc('created_at')->paginate(15);
         return view('livewire.admin-products', compact('brands', 'genders', 'colors', 'sizes', 'products'));
     }
