@@ -45,7 +45,7 @@ class AdminProducts extends Component
             $query->whereHas('sizes', function ($query) {
                 $query->where('size_id', $this->sizeSelect);
             });
-        })->where('name','LIKE','%' . $this->searchProduct . '%')->orderByDesc('created_at')->paginate(15);
+        })->where('name','LIKE','%' . $this->searchProduct . '%')->withTrashed()->orderByDesc('created_at')->paginate(15);
         return view('livewire.admin-products', compact('brands', 'genders', 'colors', 'sizes', 'products'));
     }
 

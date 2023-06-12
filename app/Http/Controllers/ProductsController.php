@@ -218,6 +218,18 @@ class ProductsController extends Controller
         $post->delete();
         return redirect()->route('products.index');
     }
+    public function productRestore($id){
+        Product::onlyTrashed()->where('id', $id)->restore();
+        // herstel ook alle posts van de gebruiker
+        $product = Product::withTrashed()->where('id', $id)->first();
+        $product->onlyTrashed()->restore();
+        return redirect()->route('products.index')->with([
+            'alert' => [
+                'message' => 'product restored',
+                'type' => 'success'
+            ]
+        ]);
+    }
 
     public function productsPerBrand($id)
     {

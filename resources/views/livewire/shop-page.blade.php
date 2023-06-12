@@ -1,4 +1,4 @@
-<div class="bg-white row justify-content-center">
+<div class="bg-white row justify-content-center mx-auto">
     <section class="py-4 row col-12 col-lg-10 offset-lg-1">
         <div class="p-0 col-12 col-lg-2" id="filters">
             <header>
@@ -123,15 +123,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-10 d-flex flex-wrap justify-content-center" id="content">
+        <div class="col-12 col-lg-10 d-flex flex-wrap justify-content-start align-items-stretch gap-2 pb-3" id="content">
             @foreach($products as $product)
                 <a class="text-decoration-none text-black" href="{{ route('frontend.show',$product->id) }}">
-                    <div class="card m-2" style="width: 19rem">
+                    <div class="card h-100" style="width: 19rem">
                         <img alt="shoe" class="card-img-top" src="{{ asset($product->photo->file) }}">
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <h3 class="card-title">{{ $product->name }}</h3>
                             <p class="card-text">&euro; {{ $product->price }}</p>
-                            <div class="py-3">
+                            <div class="py-3 mt-auto">
                                 @if($cart->where('id',$product->id)->count())
                                     <p>In cart</p>
                                 @else

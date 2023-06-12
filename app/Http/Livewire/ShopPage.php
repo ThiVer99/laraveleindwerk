@@ -53,7 +53,7 @@ class ShopPage extends Component
                 'showConfirmButton' => true,
                 'showDenyButton' => true,
                 'onConfirmed' => 'loginRedirect',
-                'onDeny' => 'registerRedirect',
+                'onDenied' => 'registerRedirect',
                 'confirmButtonText' => 'Login',
                 'denyButtonText' => 'Register'
             ]);

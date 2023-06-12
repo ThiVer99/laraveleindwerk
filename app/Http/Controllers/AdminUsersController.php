@@ -171,7 +171,7 @@ class AdminUsersController extends Controller
      * Remove the specified resource from img.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -179,7 +179,12 @@ class AdminUsersController extends Controller
         $user = User::findOrFail($id);
         UsersSoftDelete::dispatch($user);
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with([
+            'alert' => [
+                'message' => 'User deleted',
+                'type' => 'danger'
+            ]
+        ]);;
     }
     public function userRestore($id){
         User::onlyTrashed()->where('id', $id)->restore();
@@ -188,9 +193,9 @@ class AdminUsersController extends Controller
         $user->posts()->onlyTrashed()->restore();
         return redirect()->route('users.index')->with([
             'alert' => [
-                'message' => 'User deleted',
-                'type' => 'danger'
+                'message' => 'User restored',
+                'type' => 'success'
             ]
-        ]);;
+        ]);
     }
 }
