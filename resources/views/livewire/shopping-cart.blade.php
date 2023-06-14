@@ -24,6 +24,9 @@
                                     <label>quantity: </label>
                                     <input wire:change="changeQuantity('{{$cartItem->rowId}}',{{$cartItem->id}})" wire:model="quantity.{{$cartItem->id}}" class="form-control ms-2" type="number" min="1">
                                 </div>
+                                @error('quantity.' . $cartItem->id)
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="col-4 col-lg-2 py-3 py-lg-0">
                                 <p>&euro; {{ $cartItem->price * $cartItem->qty }}</p>

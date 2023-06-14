@@ -38,9 +38,16 @@ class ShoppingCart extends Component
         ]);
     }
     public function changeQuantity($rowId,$id){
-        Cart::update($rowId,$this->quantity[$id]);
+        $validatedQuantity = $this->validate([
+            'quantity.' . $id => ['required','integer', 'numeric'],
+        ], [
+            'quantity.' . $id . '.integer' => 'quantity cant be a decimal number',
+            'quantity.' . $id . '.required' => 'quantity is required',
+        ]);
+
+        Cart::update($rowId, $validatedQuantity['quantity'][$id]);
         $this->emit('cart_updated');
-        $this->alert('success', 'Quantity changed to ' . $this->quantity[$id] . '!', [
+        $this->alert('success', 'Quantity changed to ' . $validatedQuantity['quantity'][$id] . '!', [
             'position' => 'center',
             'timer' => 3000,
             'toast' => true,
