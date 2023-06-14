@@ -22,8 +22,8 @@
                         <div class="accordion-body">
                             @foreach($brands as $brand)
                                 <div class="form-check">
-                                    <input class="form-check-input" id="brand{{$brand->id}}" type="checkbox"
-                                           value="option{{$brand->id}}">
+                                    <input wire:model="selectedBrands" class="form-check-input" id="brand{{$brand->id}}" type="checkbox"
+                                           value="{{$brand->id}}">
                                     <label class="ff-rmv" for="brand{{$brand->id}}">{{$brand->name}}</label>
                                 </div>
                             @endforeach
@@ -32,7 +32,6 @@
                 </div>
                 <!-- end brands -->
                 <!-- start price -->
-
                 <div class="accordion-item">
                     <p class="accordion-header ff-rmv" id="flush-headingOne">
                         <button aria-controls="flush-collapseOne" aria-expanded="false"
@@ -62,26 +61,12 @@
                          data-bs-parent="#accordionFlushExample"
                          id="flush-collapseTwo">
                         <div class="accordion-body">
-                            <div class="form-check">
-                                <input class="form-check-input" id="colorGreen" type="checkbox" value="option1">
-                                <label class="ff-rmv" for="colorGreen">Green</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="colorBlue" type="checkbox" value="option2">
-                                <label class="ff-rmv" for="colorBlue">Blue</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="colorWhite" type="checkbox" value="option3">
-                                <label class="ff-rmv" for="colorWhite">White</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="colorBlack" type="checkbox" value="option4">
-                                <label class="ff-rmv" for="colorBlack">Black</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="colorGrey" type="checkbox" value="option5">
-                                <label class="ff-rmv" for="colorGrey">Grey</label>
-                            </div>
+                            @foreach($colors as $color)
+                                <div class="form-check">
+                                    <input wire:model="selectedColors" class="form-check-input" id="color{{$color->name}}" type="checkbox" value="{{$color->id}}">
+                                    <label class="ff-rmv" for="color{{$color->name}}">{{$color->name}}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -98,26 +83,12 @@
                          data-bs-parent="#accordionFlushExample"
                          id="flush-collapseThree">
                         <div class="accordion-body">
-                            <div class="form-check">
-                                <input class="form-check-input" id="size1" type="checkbox" value="option1">
-                                <label class="ff-rmv" for="size1">40</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="size2" type="checkbox" value="option2">
-                                <label class="ff-rmv" for="size2">41</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="size3" type="checkbox" value="option3">
-                                <label class="ff-rmv" for="size3">42</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="size4" type="checkbox" value="option4">
-                                <label class="ff-rmv" for="size4">43</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="size5" type="checkbox" value="option5">
-                                <label class="ff-rmv" for="size5">44</label>
-                            </div>
+                            @foreach($sizes as $size)
+                                <div class="form-check">
+                                    <input wire:model="selectedSizes" class="form-check-input" id="size{{$size->name}}" type="checkbox" value="{{$size->id}}">
+                                    <label class="ff-rmv" for="size{{$size->name}}">{{$size->name}}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -125,12 +96,13 @@
         </div>
         <div class="col-12 col-lg-10 d-flex flex-wrap justify-content-start align-items-stretch gap-2 pb-3" id="content">
             @foreach($products as $product)
-                <a class="text-decoration-none text-black mx-auto" href="{{ route('frontend.show',$product->id) }}">
+                <a class="text-decoration-none text-black mx-auto mb-3" href="{{ route('frontend.show',$product->id) }}">
                     <div class="card h-100" style="width: 19rem">
                         <img alt="shoe" class="card-img-top" src="{{ asset($product->photo->file) }}">
                         <div class="card-body d-flex flex-column">
                             <h3 class="card-title">{{ $product->name }}</h3>
-                            <p class="card-text">&euro; {{ $product->price }}</p>
+                            <p>by {{$product->brand->name}}</p>
+                            <p>&euro; {{ $product->price }}</p>
                             <div class="py-3 mt-auto">
                                 @if($cart->where('id',$product->id)->count())
                                     <p>In cart</p>
