@@ -4,6 +4,9 @@
             <header>
                 <h2 class="ff-rmv">Filter by</h2>
             </header>
+            <div class="d-flex justify-content-center">
+                <a class="ff-pmr text-decoration-none btn-clear-filters" href="/shop">clear filters</a>
+            </div>
             <hr>
             <!-- start brands -->
             <div>

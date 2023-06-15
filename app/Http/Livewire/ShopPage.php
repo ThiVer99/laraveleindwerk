@@ -46,7 +46,6 @@ class ShopPage extends Component
                 $query->whereHas('sizes', function ($query) {
                     $query->where('size_id', $this->selectedSizes);
                 });
-                dd($query);
             })->whereBetween('price',[$this->minPrice,$this->maxPrice])
             ->orderByDesc('updated_at')->paginate(18);
         $brands = Brand::all();
