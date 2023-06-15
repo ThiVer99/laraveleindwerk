@@ -34,4 +34,7 @@ class Product extends Model
     public function sizes(){
         return $this->belongsToMany(Size::class,'product_size');
     }
+    public function orders(){
+        return $this->belongsToMany(Order::class,'order_product');
+    }
 }

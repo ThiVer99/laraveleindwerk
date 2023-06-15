@@ -20,6 +20,19 @@ return new class extends Migration
             $table->string('session_id');
             $table->timestamps();
         });
+
+        Schema::create('order_product',function (Blueprint $table){
+            $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('product_id');
+            //$table->decimal('product_price',8,2);
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->unique(['order_id','product_id']);
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+        });
     }
 
     /**

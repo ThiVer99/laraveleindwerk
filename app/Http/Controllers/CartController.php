@@ -64,6 +64,9 @@ class CartController extends Controller
         $order->total_price = $totalPrice;
         $order->session_id = $checkout_session->id;
         $order->save();
+        foreach(Cart::content() as $cartItem){
+            $order->products()->attach($cartItem->id);
+        }
 
         return redirect($checkout_session->url);
     }
