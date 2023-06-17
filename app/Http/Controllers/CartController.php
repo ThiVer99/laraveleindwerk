@@ -7,6 +7,7 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Http\Discovery\Exception\NotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CartController extends Controller
@@ -63,9 +64,10 @@ class CartController extends Controller
         $order->status = 'unpaid';
         $order->total_price = $totalPrice;
         $order->session_id = $checkout_session->id;
+        $order->user_id = Auth::id();
         $order->save();
         foreach(Cart::content() as $cartItem){
-            $order->products()->attach($cartItem->id);
+            $order->products()->attach($cartItem->id,['product_price' => $cartItem->price]);
         }
 
         return redirect($checkout_session->url);

@@ -25,6 +25,7 @@ class ShopPage extends Component
     public $selectedBrands = [];
     public $selectedColors = [];
     public $selectedSizes = [];
+    public $sortBy;
     public $minPrice = 0;
     public $maxPrice = 0;
 
@@ -47,7 +48,13 @@ class ShopPage extends Component
                     $query->where('size_id', $this->selectedSizes);
                 });
             })->whereBetween('price',[$this->minPrice,$this->maxPrice])
-            ->orderByDesc('updated_at')->paginate(18);
+            ->when($this->sortBy == 'new',function ($query){
+                $query->orderByDesc('updated_at');
+            })->when($this->sortBy == 'highest',function ($query){
+                $query->orderBy('price','desc');
+            })->when($this->sortBy == 'lowest',function ($query){
+                $query->orderBy('price','asc');
+            })->paginate(18);
         $brands = Brand::all();
         $colors = Color::all();
         $sizes = Size::all();

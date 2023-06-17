@@ -5,8 +5,15 @@
                 <h2 class="ff-rmv">Filter by</h2>
             </header>
             <div class="d-flex justify-content-center">
-                <a class="ff-pmr text-decoration-none btn-clear-filters" href="/shop">clear filters</a>
+                <a class="ff-pmr text-decoration-none btn-clear-filters text-center" href="/shop">clear filters</a>
             </div>
+            <hr>
+            <p class="ff-rmv-bold">Sort By</p>
+            <select wire:model="sortBy" class="form-select" aria-label="Sort By">
+                <option value="new">New</option>
+                <option value="highest">Highest price</option>
+                <option value="lowest">Lowest Price</option>
+            </select>
             <hr>
             <!-- start brands -->
             <div>

@@ -13,6 +13,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItunesController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ShopController;
@@ -41,6 +42,7 @@ Route::get("/shop", [ShopController::class, "index"])->name("frontend.shop");
 Route::get('/shop/{id}', [ShopController::class, 'show'])->name('frontend.show');
 Route::post('/', [CartController::class, 'store'])->name('cart.store');
 Route::get("/cart", [CartController::class, "index"])->name("frontend.cart");
+Route::get("/orders", [OrdersController::class, "index"])->name("frontend.orders");
 
 Route::post("/checkout", [CartController::class, "checkout"])->name("frontend.checkout");
 Route::get("/success", [CartController::class, "success"])->name("frontend.checkout.success");
