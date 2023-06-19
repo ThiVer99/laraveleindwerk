@@ -37,7 +37,15 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Successfully added!');
     }
 
-    public function checkout()
+    public function orderDetails(){
+        $cartItems = Cart::content();
+        $subTotal = Cart::subtotal();
+        $tax = Cart::tax();
+        $total = Cart::total();
+        return view('orderDetails',compact('cartItems','subTotal','tax','total'));
+    }
+
+    public function checkout(Request $request)
     {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
 

@@ -59,7 +59,7 @@ class ShopPage extends Component
                 $query->orderBy('price', 'desc');
             })->when($this->sortBy == 'lowest', function ($query) {
                 $query->orderBy('price', 'asc');
-            })->paginate(18);
+            })->paginate(16);
         $brands = Brand::all();
         $colors = Color::all();
         $sizes = Size::all();

@@ -67,7 +67,7 @@
                         <p>&euro;{{$total}}</p>
                     </div>
                     @if(!$cartItems->isEmpty())
-                    <form action="{{route('frontend.checkout')}}" method="POST">
+                    <form action="{{route('frontend.orderDetails')}}" method="GET">
                         @csrf
                         <button class="btn-checkout mb-4">Checkout</button>
                     </form>
