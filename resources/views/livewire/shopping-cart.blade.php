@@ -16,8 +16,8 @@
                             <div class="col-8 col-lg-4 row align-items-center">
                                 <p>{{ $cartItem->name }}</p>
                                 <p>Price: &euro; {{ $cartItem->price }}</p>
-                                <p>Size: 43</p>
-                                <p class="m-0">Color: Black and Red</p>
+                                <p>Size: {{ $cartItem->options->size->name }}</p>
+                                <p class="m-0">Color: {{ $cartItem->options->color->name }}</p>
                             </div>
                             <div class="col-4 offset-4 offset-lg-0 col-lg-3 py-3 py-lg-0">
                                 <div class="d-flex align-items-center">
@@ -32,8 +32,7 @@
                                 <p>&euro; {{ $cartItem->price * $cartItem->qty }}</p>
                             </div>
                             <div class="col-2 offset-9 offset-lg-0 col-lg-1 cart-delete">
-                                <button wire:click="remove('{{$cartItem->rowId}}')" type="submit" class="btn-delete">X
-                                </button>
+                                <button wire:click="remove('{{$cartItem->rowId}}')" type="submit" class="btn-delete">X</button>
                             </div>
                         </div>
                     @endforeach
@@ -67,6 +66,7 @@
                         <h5>Total:</h5>
                         <p>&euro;{{$total}}</p>
                     </div>
+                    @if(!$cartItems->isEmpty())
                     <form action="{{route('frontend.checkout')}}" method="POST">
                         @csrf
                         <button class="btn-checkout mb-4">Checkout</button>
@@ -88,6 +88,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

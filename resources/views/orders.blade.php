@@ -13,14 +13,14 @@
                             @foreach($orders as $order)
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$order->id}}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                         {{$order->created_at}} - {{$order->status}}
                                     </button>
                                 </h2>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                                <div id="panelsStayOpen-collapse{{$order->id}}" class="accordion-collapse collapse">
                                     <div class="accordion-body">
                                         @foreach($order->products as $product)
-                                            <p>{{$product->name}} - {{$product->price}}</p>
+                                            <p>{{$product->name}} - {{$product->pivot->product_price}} - {{$colors[$product->pivot->color_id -1 ]->name}} - {{$sizes[$product->pivot->size_id - 1]->name}}</p>
                                         @endforeach
                                     </div>
                                 </div>

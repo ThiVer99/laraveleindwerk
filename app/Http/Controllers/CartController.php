@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Size;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Http\Discovery\Exception\NotFoundException;
 use Illuminate\Http\Request;
@@ -21,11 +23,15 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $product = Product::findOrFail($request->input('product_id'));
+        $color = Color::findOrFail($request->color);
+        $size = Size::findOrFail($request->size);
         Cart::add(
             $product->id,
             $product->name,
             1,
-            $product->price
+            $product->price,
+            0,
+            ["size" => $size, "color" => $color]
         )->associate('App\Models\Product');
 
         return redirect()->back()->with('message', 'Successfully added!');
@@ -56,8 +62,8 @@ class CartController extends Controller
         $checkout_session = $stripe->checkout->sessions->create([
             'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => route('frontend.checkout.success', [],true)."?session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => route('frontend.checkout.cancel', [],true),
+            'success_url' => route('frontend.checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
+            'cancel_url' => route('frontend.checkout.cancel', [], true),
         ]);
 
         $order = new Order();
@@ -66,46 +72,49 @@ class CartController extends Controller
         $order->session_id = $checkout_session->id;
         $order->user_id = Auth::id();
         $order->save();
-        foreach(Cart::content() as $cartItem){
-            $order->products()->attach($cartItem->id,['product_price' => $cartItem->price]);
+        foreach (Cart::content() as $cartItem) {
+            $order->products()->attach($cartItem->id, ['product_price' => $cartItem->price, 'color_id' => $cartItem->options->color->id,'size_id' => $cartItem->options->size->id]);
         }
 
         return redirect($checkout_session->url);
     }
 
-    public function success(){
+    public function success()
+    {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
 
         try {
             $session = $stripe->checkout->sessions->retrieve($_GET['session_id']);
 
-            if (!$session){
+            if (!$session) {
                 throw new NotFoundException();
             }
             $customer = $session->customer_details;
 
-            $order = Order::where('session_id',$session->id)->first();
-            if (!$order){
+            $order = Order::where('session_id', $session->id)->first();
+            if (!$order) {
                 throw new NotFoundHttpException();
             }
-            if($order->status == 'unpaid'){
+            if ($order->status == 'unpaid') {
                 $order->status = 'paid';
                 $order->save();
             }
             //clear cart content n after success order
             Cart::destroy();
 
-            return view('checkout.checkout-success',compact('customer'));
-        }catch (\Exception $e){
+            return view('checkout.checkout-success', compact('customer'));
+        } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
     }
 
-    public function cancel(){
+    public function cancel()
+    {
         return view('checkout.checkout-cancel');
     }
 
-    public function webhook(){
+    public function webhook()
+    {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -121,10 +130,10 @@ class CartController extends Controller
             );
         } catch (\UnexpectedValueException $e) {
             // Invalid payload
-            return response('',400);
+            return response('', 400);
         } catch (\Stripe\Exception\SignatureVerificationException $e) {
             // Invalid signature
-            return response('',400);
+            return response('', 400);
         }
 
 // Handle the event
@@ -133,8 +142,8 @@ class CartController extends Controller
                 $session = $event->data->object;
                 $sessionId = $session->id;
 
-                $order = Order::where('session_id',$session->id)->first();
-                if($order && $order->status == 'unpaid'){
+                $order = Order::where('session_id', $session->id)->first();
+                if ($order && $order->status == 'unpaid') {
                     $order->status = 'paid';
                     $order->save();
                     //send email to customer
