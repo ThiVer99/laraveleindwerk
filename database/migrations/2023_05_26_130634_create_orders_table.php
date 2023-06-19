@@ -29,6 +29,7 @@ return new class extends Migration
             $table->foreignId('color_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->foreignId('size_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->decimal('product_price',8,2);
+            $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
         });

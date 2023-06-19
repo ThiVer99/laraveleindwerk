@@ -17,13 +17,13 @@ class GenderTableSeeder extends Seeder
     {
         //
         DB::table('genders')->insert([
-            'name' => 'M'
+            'name' => 'Men'
         ]);
         DB::table('genders')->insert([
-            'name' => 'V'
+            'name' => 'Women'
         ]);
         DB::table('genders')->insert([
-            'name' => 'X'
+            'name' => 'Unisex'
         ]);
     }
 }

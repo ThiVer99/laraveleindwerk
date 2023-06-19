@@ -83,6 +83,7 @@
 }
 
 .btn-add-cart {
+    border: none;
     font-family: rmv,sans-serif;
     color: white;
     padding: 10px 70px;

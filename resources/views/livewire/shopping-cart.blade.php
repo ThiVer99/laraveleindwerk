@@ -1,5 +1,5 @@
 <div>
-    <div class="bg-white row min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="bg-white row min-vh-100 d-flex justify-content-center">
         <div class="col-12 col-lg-10 row mt-5 pt-5">
             <div class="col-12 col-lg-8 ff-rmv">
                 <h2>My cart</h2>

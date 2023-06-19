@@ -73,7 +73,12 @@ class CartController extends Controller
         $order->user_id = Auth::id();
         $order->save();
         foreach (Cart::content() as $cartItem) {
-            $order->products()->attach($cartItem->id, ['product_price' => $cartItem->price, 'color_id' => $cartItem->options->color->id,'size_id' => $cartItem->options->size->id]);
+            $order->products()->attach($cartItem->id, [
+                'product_price' => $cartItem->price,
+                'color_id' => $cartItem->options->color->id,
+                'size_id' => $cartItem->options->size->id,
+                'quantity' => $cartItem->qty,
+            ]);
         }
 
         return redirect($checkout_session->url);

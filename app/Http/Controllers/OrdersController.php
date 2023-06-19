@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Color;
 use App\Models\Order;
 use App\Models\Size;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller

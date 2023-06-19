@@ -19,6 +19,7 @@
     "dependencies": {
         "@prettier/plugin-php": "^0.19.3",
         "openai": "^3.2.1",
-        "prettier": "^2.8.4"
+        "prettier": "^2.8.4",
+        "sweetalert2": "^11.7.12"
     }
 }
