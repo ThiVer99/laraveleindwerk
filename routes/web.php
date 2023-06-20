@@ -43,7 +43,7 @@ Route::get('/shop/{id}', [ShopController::class, 'show'])->name('frontend.show')
 Route::post('/', [CartController::class, 'store'])->name('cart.store');
 Route::get("/cart", [CartController::class, "index"])->name("frontend.cart");
 Route::get("/order-details", [CartController::class, "orderDetails"])->name("frontend.orderDetails");
-Route::get("/orders", [OrdersController::class, "index"])->name("frontend.orders");
+Route::get("/orders", [OrdersController::class, "frontendIndex"])->name("frontend.orders");
 
 Route::post("/checkout", [CartController::class, "checkout"])->name("frontend.checkout");
 Route::get("/success", [CartController::class, "success"])->name("frontend.checkout.success");
@@ -77,6 +77,7 @@ Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]
     Route::resource('products', ProductsController::class);
     Route::post('products/restore/{product:id}', [ProductsController::class, 'productRestore'])->name('products.restore');
     Route::get('products/brand/{id}', [ProductsController::class, 'productsPerBrand'])->name('admin.productsPerBrand');
+    Route::resource('orders', OrdersController::class);
     Route::resource('brands', AdminBrandsController::class);
     Route::resource('genders', AdminGendersController::class);
     Route::resource('colors', AdminColorsController::class);

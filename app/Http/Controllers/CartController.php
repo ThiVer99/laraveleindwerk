@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
@@ -47,6 +48,35 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
+        request()->validate([
+            'firstName' => 'required|between:2,255',
+            'lastName' => 'required|between:2,255',
+            'address' => 'required|between:1,255',
+            'number' => 'required|between:1,255',
+            'city' => 'required|between:1,255',
+            'postalCode' => 'required',
+            'state' => 'required|between:1,255',
+            'country' => 'required|between:1,255',
+            'email' => 'required|email',
+        ]);
+        $address =
+            Address::where('address' ,'=' , strtoupper($request->address))
+            ->where('number','=',strtoupper($request->number))
+            ->where('city','=',strtoupper($request->city))
+            ->where('postal_code','=',strtoupper($request->postalCode))
+            ->first();
+        if ($address === null){
+            $address = new Address();
+            $address->name = strtoupper($request->lastName) . ' ' . strtoupper($request->firstName);
+            $address->address = strtoupper($request->address);
+            $address->number = strtoupper($request->number);
+            $address->city = strtoupper($request->city);
+            $address->postal_code = strtoupper($request->postalCode);
+            $address->state = strtoupper($request->state);
+            $address->country = strtoupper($request->country);
+            $address->save();
+        }
+
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
 
         $products = Cart::content();
@@ -79,6 +109,7 @@ class CartController extends Controller
         $order->total_price = $totalPrice;
         $order->session_id = $checkout_session->id;
         $order->user_id = Auth::id();
+        $order->address_id = $address->id;
         $order->save();
         foreach (Cart::content() as $cartItem) {
             $order->products()->attach($cartItem->id, [

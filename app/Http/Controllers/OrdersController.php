@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
-    public function index()
+    public function index(){
+        return view('admin.orders.index');
+    }
+
+    public function frontendIndex()
     {
         $orders = Order::where('user_id',Auth::id())->with('products')->get();
         $colors = Color::all();
