@@ -26,8 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $posts = Post::with(['photo', 'categories'])->latest('created_at')->get();
-        $postfeatured = Post::latest('created_at')->first();
-        return view("home", compact('posts','postfeatured'));
+        return view("home");
     }
 }

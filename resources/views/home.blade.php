@@ -12,14 +12,14 @@
         </header>
     </div>
     <section class="row" id="collections">
-        <a class="col-12 col-lg-6 text-decoration-none text-white" href="{{route('frontend.shop')}}">
+        <a class="col-12 col-lg-6 text-decoration-none text-white" href="{{route('frontend.shop', '?selectedGenders[0]=1')}}">
             <div class="row" id="menc">
                 <header class="d-flex justify-content-center align-items-center">
                     <h2 class="text-center fs-1 ff-rmv">MEN COLLECTION</h2>
                 </header>
             </div>
         </a>
-        <a class="col-12 col-lg-6 text-decoration-none text-white" href="{{route('frontend.shop')}}">
+        <a class="col-12 col-lg-6 text-decoration-none text-white" href="{{route('frontend.shop', '?selectedGenders[0]=2')}}">
             <div class="row" id="womenc">
                 <header class="d-flex justify-content-center align-items-center">
                     <h2 class="text-center fs-1 ff-rmv">WOMEN COLLECTION</h2>

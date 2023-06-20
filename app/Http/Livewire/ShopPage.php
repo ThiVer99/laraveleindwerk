@@ -31,6 +31,8 @@ class ShopPage extends Component
     public $minPrice = 0;
     public $maxPrice = 0;
 
+    protected $queryString = ["selectedGenders"];
+
     public function mount()
     {
         $this->maxPrice = Product::max('price');
