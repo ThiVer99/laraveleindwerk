@@ -3,10 +3,12 @@
     @if(session('message'))
         <script>
             Swal.fire({
+                toast : true,
                 icon: 'success',
                 title: '{{$product->name}} added to cart',
                 showConfirmButton: false,
-                timer: 2500
+                timer: 2000,
+                timerProgressBar :true
             })
         </script>
     @endif
