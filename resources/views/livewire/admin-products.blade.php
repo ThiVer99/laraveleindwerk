@@ -1,10 +1,10 @@
 <div>
     <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <div class="d-flex align-items-center justify-content-between">
+            <p class="rounded bg-danger m-0 d-flex align-self-center p-2 text-white">{{$products->total()}} </p>
             <div class="d-flex">
                 <div class="d-flex">
-                    <p class="rounded bg-danger m-0 d-flex align-self-center p-2 text-white">{{$products->total()}} </p>
-                    <h1 class="m-0"> | Products | </h1>
+                    <h1 class="m-0"> Products </h1>
                 </div>
                 <div class="d-flex align-items-center p-2">
                     <select wire:model="brandSelect" class="form-control" name="brand-select" id="brand-select">
@@ -102,7 +102,7 @@
                 </td>
                 <td>
                         <span class="badge rounded-pill badge-secondary">
-                            {{ implode(' / ', $product->colors->pluck('name')->toArray()) }}
+                            {{ implode('/', $product->colors->pluck('name')->toArray()) }}
                         </span>
                 </td>
                 <td>
