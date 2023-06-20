@@ -19,7 +19,7 @@ class ProductColorTableSeeder extends Seeder
         $colors = Color::all();
         Product::all()->each(function ($product) use ($colors) {
             $product->colors()->attach(
-                $colors->random(rand(1, count($colors)))->pluck('id')->toArray()
+                $colors->random(rand(1, 3))->pluck('id')->toArray()
             );
         });
     }

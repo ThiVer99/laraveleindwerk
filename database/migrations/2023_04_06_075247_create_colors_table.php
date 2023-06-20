@@ -21,14 +21,10 @@ return new class extends Migration
         });
         Schema::create('product_color',function (Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('color_id');
+            $table->foreignId('product_id')->unsigned()->constrained()->cascadeOnDelete();
+            $table->foreignId('color_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->unique(['product_id','color_id']);
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
         });
     }
 

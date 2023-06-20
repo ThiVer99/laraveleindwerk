@@ -26,12 +26,7 @@
                         <option value="{{$size->id}}">{{$size->name}}</option>
                     @endforeach
                 </select>
-                <label class="pb-1" for="sizeSelect">Color:</label>
-                <select class="form-select mb-4" name="color" id="colorSelect">
-                    @foreach($product->colors as $color)
-                        <option value="{{$color->id}}">{{$color->name}}</option>
-                    @endforeach
-                </select>
+                <p>color:  {{ implode('/', $product->colors->pluck('name')->toArray()) }}</p>
                 <p class="py-4">{{$product->body}}</p>
                 @guest
                     <hr>

@@ -17,7 +17,7 @@
                                 <p>{{ $cartItem->name }}</p>
                                 <p>Price: &euro; {{ $cartItem->price }}</p>
                                 <p>Size: {{ $cartItem->options->size->name }}</p>
-                                <p class="m-0">Color: {{ $cartItem->options->color->name }}</p>
+                                <p class="m-0">Color: {{ implode('/', $cartItem->model->colors->pluck('name')->toArray()) }}</p>
                             </div>
                             <div class="col-4 offset-4 offset-lg-0 col-lg-3 py-3 py-lg-0">
                                 <div class="d-flex align-items-center">

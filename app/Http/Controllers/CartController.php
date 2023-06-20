@@ -24,7 +24,6 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $product = Product::findOrFail($request->input('product_id'));
-        $color = Color::findOrFail($request->color);
         $size = Size::findOrFail($request->size);
         Cart::add(
             $product->id,
@@ -32,7 +31,7 @@ class CartController extends Controller
             1,
             $product->price,
             0,
-            ["size" => $size, "color" => $color]
+            ["size" => $size]
         )->associate('App\Models\Product');
 
         return redirect()->back()->with('message', 'Successfully added!');
@@ -114,7 +113,6 @@ class CartController extends Controller
         foreach (Cart::content() as $cartItem) {
             $order->products()->attach($cartItem->id, [
                 'product_price' => $cartItem->price,
-                'color_id' => $cartItem->options->color->id,
                 'size_id' => $cartItem->options->size->id,
                 'quantity' => $cartItem->qty,
             ]);

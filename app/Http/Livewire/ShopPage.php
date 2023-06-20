@@ -47,9 +47,11 @@ class ShopPage extends Component
             })->when($this->selectedBrands, function ($query) {
                 $query->whereIn('brand_id', $this->selectedBrands);
             })->when($this->selectedColors, function ($query) {
-                $query->whereHas('colors', function ($query) {
-                    $query->where('color_id', $this->selectedColors);
-                });
+                foreach ($this->selectedColors as $color){
+                    $query->whereHas('colors', function ($query) use ($color){
+                        $query->where('color_id', $color);
+                    });
+                }
             })->when($this->selectedSizes, function ($query) {
                 $query->whereHas('sizes', function ($query) {
                     $query->where('size_id', $this->selectedSizes);

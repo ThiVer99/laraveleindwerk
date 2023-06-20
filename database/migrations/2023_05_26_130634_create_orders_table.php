@@ -27,7 +27,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->unsigned()->constrained()->cascadeOnDelete();
-            $table->foreignId('color_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->foreignId('size_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->decimal('product_price',8,2);
             $table->integer('quantity');

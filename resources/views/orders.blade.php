@@ -27,7 +27,7 @@
                                                         <p>Name: {{ $orderItem->name }}</p>
                                                         <p>Price per item: &euro; {{ $orderItem->price }}</p>
                                                         <p>Total price: &euro; {{ $orderItem->price * $orderItem->pivot->quantity}}</p>
-                                                        <p>Color: {{$colors[$orderItem->pivot->color_id -1 ]->name}}</p>
+                                                        <p>Color: {{ implode(' / ', $orderItem->colors->pluck('name')->toArray()) }}</p>
                                                         <p>Size: {{$sizes[$orderItem->pivot->size_id -1 ]->name}}</p>
                                                         <p>Quantity: {{$orderItem->pivot->quantity}}</p>
                                                         <div class="py-3 mt-auto">
