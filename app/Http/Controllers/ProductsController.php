@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Color;
 use App\Models\Gender;
-use App\Models\Keyword;
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -35,13 +33,12 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        $keywords = Keyword::all();
         $productcategories = ProductCategory::all();
         $brands = Brand::all();
         $genders = Gender::all();
         $colors = Color::all();
         $sizes = Size::all();
-        return view('admin.products.create', compact('keywords', 'productcategories', 'brands', 'genders', 'colors', 'sizes'));
+        return view('admin.products.create', compact( 'productcategories', 'brands', 'genders', 'colors', 'sizes'));
     }
 
     /**
@@ -58,7 +55,6 @@ class ProductsController extends Controller
             'brand_id' => 'required',
             'productcategories' => 'required|min:1',
             'price' => 'required|numeric|between:0,999999.99',
-            'keywords' => ['required', Rule::exists('keywords', 'id')],
             'body' => 'required',
             'photo_id' => 'required',
             'gender_id' => 'required',
@@ -71,7 +67,6 @@ class ProductsController extends Controller
                 'brand_id.required' => 'select a brand',
                 'body.required' => 'Message is required',
                 'productcategories.required' => 'Select at least one category',
-                'keywords.required' => 'Please check minimum one keyword',
                 'photo_id.required' => 'Upload a picture of the product',
                 'gender_id.required' => 'Please select a gender',
                 'colors.required' => 'please select min 1 color',
@@ -94,11 +89,6 @@ class ProductsController extends Controller
             $product->photo_id = $photo->id;
         }
         $product->save();
-        /*wegschrijven van meerder rollen in de tussentabel*/
-        foreach ($request->keywords as $keyword) {
-            $keywordfind = Keyword::findOrFail($keyword);
-            $product->keywords()->save($keywordfind);
-        }
         /*wegschrijven van meerder productcategorieen in de tussentabel*/
         $product->productcategories()->sync($request->productcategories, true);
 
@@ -236,12 +226,5 @@ class ProductsController extends Controller
                 'type' => 'success'
             ]
         ]);
-    }
-
-    public function productsPerBrand($id)
-    {
-        $brands = Brand::all();
-        $products = Product::where('brand_id', $id)->with(['keywords', 'photo', 'brand', 'productcategories'])->paginate(10);
-        return view('admin.products.index', compact('products', 'brands'));
     }
 }

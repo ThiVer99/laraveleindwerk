@@ -28,7 +28,7 @@ class AdminProducts extends Component
         $genders = Gender::all();
         $colors = Color::all();
         $sizes = Size::all();
-        $products = Product::with(['keywords', 'photo', 'brand', 'productcategories', 'gender', 'colors', 'sizes'
+        $products = Product::with([ 'photo', 'brand', 'productcategories', 'gender', 'colors', 'sizes'
         ])->when($this->genderSelect, function ($query) {
             //als gender wordt aan geklikt dan wordt deze query toegevoegd aan de orignele query
             $query->where('gender_id', $this->genderSelect);

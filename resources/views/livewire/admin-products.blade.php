@@ -40,8 +40,8 @@
                 </div>
                 <div class="d-flex align-items-center p-2">
                     <select wire:model="deleteSelect" class="form-control" name="delete-select" id="delete-select">
-                        <option value="0">Not Deleted</option>
-                        <option value="1">Deleted</option>
+                        <option value="0">All Products</option>
+                        <option value="1">Deleted Products</option>
                     </select>
                 </div>
             </div>

@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminCategoriesController;
 use App\Http\Controllers\AdminColorsController;
 use App\Http\Controllers\AdminGendersController;
-use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminSizesController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\BackendController;
@@ -52,8 +50,6 @@ Route::post("/webhook",[CartController::class,'webhook'])->name('frontend.checko
 
 Route::get('contactformulier', [ContactController::class, 'create'])->name('contact.create');
 Route::post('contactformulier', [ContactController::class, 'store'])->name('contact.store');
-Route::get('/post/{post:slug}', [AdminPostsController::class, 'post'])->name('frontend.post');
-Route::get('/category/{category:slug}', [AdminCategoriesController::class, 'category'])->name('category.category');
 
 Route::get('/itunes', [ItunesController::class, 'index'])->name('itunes.index');
 
@@ -64,15 +60,6 @@ Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]
         BackendController::class,
         "index",
     ])->name("backend.home");
-//    Post routes
-    Route::resource('posts', AdminPostsController::class, ['except' => ['show']]);
-    Route::get('posts/{post:slug}', [AdminPostsController::class, 'show'])->name('posts.show');
-    Route::get('authors/{author:name}', [AdminPostsController::class, 'indexByAuthor'])->name('authors');
-    Route::post('posts/restore/{post}', [AdminPostsController::class, 'postRestore'])->name('admin.postrestore');
-    // Category routes
-    Route::resource('categories', AdminCategoriesController::class);
-    // Comment routes
-    Route::resource('comments', CommentController::class);
     //Product Routes
     Route::resource('products', ProductsController::class);
     Route::post('products/restore/{product:id}', [ProductsController::class, 'productRestore'])->name('products.restore');

@@ -43,47 +43,6 @@
         </div>
     </li>
     @endcan
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePosts"
-           aria-expanded="true" aria-controls="collapsePosts">
-            <i class="fas fa-blog"></i>
-            <span>Posts</span>
-        </a>
-        <div id="collapsePosts" class="collapse" aria-labelledby="collapsePosts" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Links:</h6>
-                <a class="collapse-item" href="{{route('posts.index')}}">All posts</a>
-                <a class="collapse-item" href="{{route('posts.create')}}">Create post</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
-           aria-expanded="true" aria-controls="collapseCategories">
-            <i class="fas fa-hashtag"></i>
-            <span>Categories</span>
-        </a>
-        <div id="collapseCategories" class="collapse" aria-labelledby="collapseCategories" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Links:</h6>
-                <a class="collapse-item" href="{{route('categories.index')}}">All Categories</a>
-                <a class="collapse-item" href="{{route('categories.create')}}">Create Category</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComments"
-           aria-expanded="true" aria-controls="collapseComments">
-            <i class="fas fa-comment"></i>
-            <span>Comments</span>
-        </a>
-        <div id="collapseComments" class="collapse" aria-labelledby="collapseComments" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Links:</h6>
-                <a class="collapse-item" href="{{route('comments.index')}}">All Comments</a>
-            </div>
-        </div>
-    </li>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 

@@ -13,9 +13,6 @@ class Product extends Model
     use SoftDeletes;
     protected $fillable = ['photo_id','name', 'body','price','gender_id'];
 
-    public function keywords(){
-        return $this->morphToMany(Keyword::class,'keywordable');
-    }
     public function photo(){
         return $this->belongsTo(Photo::class);
     }

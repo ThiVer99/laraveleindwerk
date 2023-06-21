@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Comment;
 use App\Models\ProductCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        $this->call([RoleSeeder::class,GenderTableSeeder::class, PhotoSeeder::class, UsersTableSeeder::class,UsersRolesTableSeeder::class,CategorySeeder::class,PostSeeder::class,PostCategorySeed::class, CommentSeeder::class, KeywordsTableSeeder::class, BrandSeeder::class, ProductSeeder::class, ColorSeeder::class, SizeSeeder::class,ProductCategorySeeder::class, Product_ProductCategorySeeder::class,ProductColorTableSeeder::class,ProductSizeTableSeeder::class]);
+        $this->call([RoleSeeder::class,GenderTableSeeder::class, PhotoSeeder::class, UsersTableSeeder::class,UsersRolesTableSeeder::class, BrandSeeder::class, ProductSeeder::class, ColorSeeder::class, SizeSeeder::class,ProductCategorySeeder::class, Product_ProductCategorySeeder::class,ProductColorTableSeeder::class,ProductSizeTableSeeder::class]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

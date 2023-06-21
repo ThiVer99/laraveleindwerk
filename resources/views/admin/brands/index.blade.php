@@ -4,7 +4,7 @@
         <div class="d-flex">
             <p class="rounded bg-danger m-0 d-flex align-self-center p-2 text-white">{{$brands->total()}}</p>
             <h1 class="m-0">| Brands</h1>
-            <a href="{{route('posts.index')}}" class="btn btn-primary m-2 rounded-pill">All Brands</a>
+            <a href="{{route('brands.index')}}" class="btn btn-primary m-2 rounded-pill">All Brands</a>
         </div>
         <a href="{{route('brands.create')}}" class="btn btn-primary m-2 rounded-pill">Add Brand</a>
 
