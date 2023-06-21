@@ -105,15 +105,14 @@ class AdminBrandsController extends Controller
     {
         //
         try {
-            $brand = Brand::findOrFail($id);
+            Brand::findOrFail($id)->delete();
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'brand not found.'], 404);
         }
 
-        $brand->delete();
         return redirect()->route('brands.index')->with([
             'alert' => [
-                'message' => 'Brand deleted!',
+                'message' => ' deleted!',
                 'type' => 'danger'
             ]
         ]);
@@ -128,7 +127,7 @@ class AdminBrandsController extends Controller
 
         return redirect()->route('brands.index')->with([
             'alert' => [
-                'message' => 'Brand restored!',
+                'message' => ' restored!',
                 'type' => 'success'
             ]
         ]);

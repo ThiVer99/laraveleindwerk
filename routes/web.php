@@ -56,21 +56,29 @@ Route::get('/itunes', [ItunesController::class, 'index'])->name('itunes.index');
 /**backend**/
 
 Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]], function () {
-    Route::get("/", [
-        BackendController::class,
-        "index",
-    ])->name("backend.home");
+    Route::get("/", [BackendController::class, "index",])->name("backend.home");
     //Product Routes
     Route::resource('products', ProductsController::class);
     Route::post('products/restore/{product:id}', [ProductsController::class, 'productRestore'])->name('products.restore');
     Route::get('products/brand/{id}', [ProductsController::class, 'productsPerBrand'])->name('admin.productsPerBrand');
+    //Order routes
     Route::resource('orders', OrdersController::class);
+    //Brand Routes
     Route::resource('brands', AdminBrandsController::class);
     Route::post('brands/restore/{brand:id}', [AdminBrandsController::class, 'brandRestore'])->name('brands.restore');
+    //Genders Routes
     Route::resource('genders', AdminGendersController::class);
+    Route::post('genders/restore/{gender:id}', [AdminGendersController::class, 'genderRestore'])->name('genders.restore');
+
+    //Colors Routes
     Route::resource('colors', AdminColorsController::class);
+    Route::post('colors/restore/{gender:id}', [AdminColorsController::class, 'colorRestore'])->name('colors.restore');
+    //Size Routes
     Route::resource('sizes', AdminSizesController::class);
+    Route::post('sizes/restore/{size:id}', [AdminSizesController::class, 'sizeRestore'])->name('sizes.restore');
+    //Product Category routes
     Route::resource('productcategories', ProductCategoryController::class);
+    Route::post('productcategories/restore/{productcategory:id}', [ProductCategoryController::class, 'productCategoryRestore'])->name('productcategories.restore');
 
     Route::group(["middleware" => 'admin'], function () {
         Route::resource("users", AdminUsersController::class);

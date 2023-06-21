@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
@@ -16,7 +17,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         //
-        $productcategories = ProductCategory::Paginate(10);
+        $productcategories = ProductCategory::withTrashed()->Paginate(10);
         return view('admin.productcategories.index', compact('productcategories'));
     }
 
@@ -87,10 +88,35 @@ class ProductCategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        try {
+            ProductCategory::findOrFail($id)->delete();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Product category not found.'], 404);
+        }
+
+        return redirect()->route('productcategories.index')->with([
+            'alert' => [
+                'message' => 'Product category deleted!',
+                'type' => 'danger'
+            ]
+        ]);
+    }
+    public function productCategoryRestore($id){
+        try {
+            ProductCategory::onlyTrashed()->where('id', $id)->restore();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Product category not found.'], 404);
+        }
+
+        return redirect()->route('productcategories.index')->with([
+            'alert' => [
+                'message' => 'Product category restored!',
+                'type' => 'success'
+            ]
+        ]);
     }
 }

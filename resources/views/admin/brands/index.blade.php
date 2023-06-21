@@ -12,7 +12,7 @@
     </div>
     @if (session('alert'))
         <x-alert :type="session('alert')['type']" :message="session('alert')['message']">
-            <x-slot name="title"></x-slot>
+            <x-slot name="title">Brand</x-slot>
         </x-alert>
     @endif
     <table class="table table-striped shadow-lg p-3 mb-5 bg-body-tertiary rounded">

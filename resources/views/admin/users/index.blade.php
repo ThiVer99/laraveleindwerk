@@ -6,7 +6,7 @@
     <h1>USERS</h1>
     @if (session('alert'))
         <x-alert :type="session('alert')['type']" :message="session('alert')['message']">
-            <x-slot name="title">Users</x-slot>
+            <x-slot name="title">User</x-slot>
         </x-alert>
     @endif
 

@@ -14,7 +14,7 @@ class AdminGendersController extends Controller
      */
     public function index()
     {
-        $genders = Gender::paginate(10);
+        $genders = Gender::withTrashed()->paginate(10);
         return view('admin.genders.index', compact('genders'));
     }
 
@@ -85,24 +85,47 @@ class AdminGendersController extends Controller
 
         $gender = Gender::findOrFail($id);
         $gender->update($request->all());
-        return redirect()->route('genders.index');
+        return redirect()->route('genders.index')->with([
+            'alert' => [
+                'message' => ' updated!',
+                'type' => 'warning'
+            ]
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         try {
-            $gender = Gender::findOrFail($id);
+            Gender::findOrFail($id)->delete();
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'gender not found.'], 404);
         }
 
-        $gender->delete();
-        return redirect()->route('genders.index');
+        return redirect()->route('genders.index')->with([
+            'alert' => [
+                'message' => ' deleted!',
+                'type' => 'danger'
+            ]
+        ]);
+    }
+    public function genderRestore($id){
+        try {
+            Gender::onlyTrashed()->where('id', $id)->restore();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'gender not found.'], 404);
+        }
+
+        return redirect()->route('genders.index')->with([
+            'alert' => [
+                'message' => ' restored!',
+                'type' => 'success'
+            ]
+        ]);
     }
 }

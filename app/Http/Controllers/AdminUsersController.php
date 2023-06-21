@@ -79,7 +79,7 @@ class AdminUsersController extends Controller
         //return redirect('admin/users');
         return redirect()->route('users.index')->with([
             'alert' => [
-                'message' => 'User added',
+                'message' => ' added',
                 'type' => 'success'
             ]
         ]);
@@ -172,7 +172,7 @@ class AdminUsersController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with([
             'alert' => [
-                'message' => 'User deleted',
+                'message' => ' deleted',
                 'type' => 'danger'
             ]
         ]);
@@ -182,7 +182,7 @@ class AdminUsersController extends Controller
         $user = User::withTrashed()->where('id', $id)->first();
         return redirect()->route('users.index')->with([
             'alert' => [
-                'message' => 'User restored',
+                'message' => ' restored',
                 'type' => 'success'
             ]
         ]);

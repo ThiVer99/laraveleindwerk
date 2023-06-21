@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Size;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class AdminSizesController extends Controller
@@ -14,7 +15,7 @@ class AdminSizesController extends Controller
      */
     public function index()
     {
-        $sizes = Size::paginate(10);
+        $sizes = Size::withTrashed()->paginate(10);
         return view('admin.sizes.index', compact('sizes'));
     }
 
@@ -95,10 +96,36 @@ class AdminSizesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        try {
+            Size::findOrFail($id)->delete();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Size not found.'], 404);
+        }
+
+        return redirect()->route('sizes.index')->with([
+            'alert' => [
+                'message' => ' deleted!',
+                'type' => 'danger'
+            ]
+        ]);
+    }
+
+    public function sizeRestore($id){
+        try {
+            Size::onlyTrashed()->where('id', $id)->restore();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Size not found.'], 404);
+        }
+
+        return redirect()->route('sizes.index')->with([
+            'alert' => [
+                'message' => ' restored!',
+                'type' => 'success'
+            ]
+        ]);
     }
 }

@@ -14,8 +14,7 @@ class AdminColorsController extends Controller
      */
     public function index()
     {
-        //
-        $colors = Color::paginate(10);
+        $colors = Color::withTrashed()->paginate(10);
         return view('admin.colors.index',compact('colors'));
     }
 
@@ -67,7 +66,7 @@ class AdminColorsController extends Controller
     public function edit($id)
     {
         //
-        $color = Color::findOrFail($id);
+        $color = Color::withTrashed()->findOrFail($id);
         return view('admin.colors.edit',compact('color'));
     }
 
@@ -86,26 +85,49 @@ class AdminColorsController extends Controller
             'name.required' => 'Please enter a name'
         ]);
 
-        $color = Color::findOrFail($id);
+        $color = Color::withTrashed()->findOrFail($id);
         $color->update($request->all());
-        return redirect()->route('colors.index');
+        return redirect()->route('colors.index')->with([
+            'alert' => [
+                'message' => ' updated!',
+                'type' => 'warning'
+            ]
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         try {
-            $color = Color::findOrFail($id);
+            Color::findOrFail($id)->delete();
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'color not found.'], 404);
         }
 
-        $color->delete();
-        return redirect()->route('colors.index');
+        return redirect()->route('colors.index')->with([
+            'alert' => [
+                'message' => ' deleted!',
+                'type' => 'danger'
+            ]
+        ]);
+    }
+    public function colorRestore($id){
+        try {
+            Color::onlyTrashed()->where('id', $id)->restore();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'brand not found.'], 404);
+        }
+
+        return redirect()->route('colors.index')->with([
+            'alert' => [
+                'message' => ' restored!',
+                'type' => 'success'
+            ]
+        ]);
     }
 }

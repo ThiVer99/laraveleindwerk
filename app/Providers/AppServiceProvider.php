@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\User;
@@ -33,8 +34,10 @@ class AppServiceProvider extends ServiceProvider
 //
         $usersCount = User::count();
         $productCount = Product::count();
+        $orderCount = Order::count();
 
         view()->share('usersCount', $usersCount);
         view()->share('productsCount', $productCount);
+        view()->share('ordersCount', $orderCount);
     }
 }
