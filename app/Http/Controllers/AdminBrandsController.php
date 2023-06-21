@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class AdminBrandsController extends Controller
@@ -15,7 +16,7 @@ class AdminBrandsController extends Controller
     public function index()
     {
         //
-        $brands=Brand::paginate(10);
+        $brands=Brand::withTrashed()->paginate(10);
         return view('admin.brands.index', compact('brands'));
     }
 
@@ -98,7 +99,7 @@ class AdminBrandsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -110,6 +111,26 @@ class AdminBrandsController extends Controller
         }
 
         $brand->delete();
-        return redirect()->route('brands.index');
+        return redirect()->route('brands.index')->with([
+            'alert' => [
+                'message' => 'Brand deleted!',
+                'type' => 'danger'
+            ]
+        ]);
+    }
+
+    public function brandRestore($id){
+        try {
+            Brand::onlyTrashed()->where('id', $id)->restore();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'brand not found.'], 404);
+        }
+
+        return redirect()->route('brands.index')->with([
+            'alert' => [
+                'message' => 'Brand restored!',
+                'type' => 'success'
+            ]
+        ]);
     }
 }

@@ -87,11 +87,21 @@
                 <td><img class="img-thumbnail" width="62" height="62"
                          src="{{$product->photo ? asset($product->photo->file) : 'http://via.placeholder.com/62x62'}}"
                          alt="{{$product->title}}"></td>
-                <td>{{$product->brand->name}}</td>
+                <td>
+                    @if($product->brand)
+                        {{$product->brand->name}}
+                    @else
+                        <p class="text-danger">Deleted Brand</p>
+                    @endif
+                </td>
                 <td>{{$product->name}}</td>
                 <td>{{Str::limit($product->body,20)}}</td>
                 <td>
-                    {{$product->gender->name}}
+                    @if($product->gender)
+                        {{$product->gender->name}}
+                    @else
+                        <p class="text-danger">Deleted Gender</p>
+                    @endif
                 </td>
                 <td>
                     @foreach($product->productcategories as $productcategory)
@@ -101,18 +111,24 @@
                     @endforeach
                 </td>
                 <td>
-                        <span class="badge rounded-pill badge-secondary">
-                            {{ implode('/', $product->colors->pluck('name')->toArray()) }}
-                        </span>
+                    <span class="badge rounded-pill badge-secondary">
+                        {{ implode('/', $product->colors->pluck('name')->toArray()) }}
+                    </span>
                 </td>
                 <td>
                     @foreach($product->sizes as $size)
                         <span class="badge rounded-pill badge-secondary">{{$size->name}}</span>
                     @endforeach
                 </td>
-                <td>&euro;{{ $product->price }}</td>
-                <td>{{$product->created_at ? $product->created_at->diffForHumans() : ''}}</td>
-                <td>{{$product->updated_at ? $product->updated_at->diffForHumans() : ''}}</td>
+                <td>
+                    &euro;{{ $product->price }}
+                </td>
+                <td>
+                    {{$product->created_at ? $product->created_at->diffForHumans() : ''}}
+                </td>
+                <td>
+                    {{$product->updated_at ? $product->updated_at->diffForHumans() : ''}}
+                </td>
                 <td>
                     <div class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown{{ $product->id }}" role="button"
