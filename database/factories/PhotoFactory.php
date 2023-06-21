@@ -17,20 +17,20 @@ class PhotoFactory extends Factory
      */
     public function definition()
     {
-        $path = storage_path('app/public/posts');
+        $path = storage_path('app/public/products');
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
         } else {
             $files = glob($path . '/*');
             if (count($files) > 9 ) {
-                Storage::disk('public')->deleteDirectory('posts');
+                Storage::disk('public')->deleteDirectory('products');
             }
         }
         return [
             'file' => function () {
                 $imageUrl = 'https://source.unsplash.com/featured/640x480';
                 $imageData = file_get_contents($imageUrl);
-                $filename = 'posts/' . uniqid() . '.jpg';
+                $filename = 'products/' . uniqid() . '.jpg';
                 Storage::disk('public')->put($filename, $imageData);
                 return $filename;
             }
