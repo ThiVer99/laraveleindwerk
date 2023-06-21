@@ -31,14 +31,13 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fas-user"></i>
+            <i class="fa fa-user"></i>
             <span>Users</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Links:</h6>
                 <a class="collapse-item" href="{{route('users.index')}}">All users</a>
-                <a class="collapse-item" href="{{route('users.index2')}}">All users blade</a>
                 <a class="collapse-item" href="{{route('users.create')}}">Add user</a>
             </div>
         </div>

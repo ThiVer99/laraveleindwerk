@@ -38,14 +38,6 @@ class AdminUsersController extends Controller
         //of
         //return view('admin.users.index',compact('users'));
     }
-    public function index2()
-    {
-        //
-        $users = User::orderByDesc('id')->withTrashed()->paginate(20);
-        return view("admin.users.index2", ["users" => $users]);
-        //of
-        //return view('admin.users.index',compact('users'));
-    }
 
     /**
      * Show the form for creating a new resource.

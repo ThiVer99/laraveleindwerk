@@ -87,7 +87,6 @@ Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]
     Route::group(["middleware" => 'admin'], function () {
         Route::resource("users", AdminUsersController::class);
         Route::post('users/restore/{user}', [AdminUsersController::class, 'userRestore'])->name('admin.userrestore');
-        Route::get('usersblade', [AdminUsersController::class, 'index2'])->name('users.index2');
     });
 });
 
