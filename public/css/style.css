@@ -278,6 +278,20 @@ footer {
 /*begin shop-header*/
 
 /*begin shop-content*/
+.shop-input-seach{
+    border: 2px solid black;
+    border-radius: 0;
+}
+.shop-input-seach:hover{
+    color: black;
+    border: 2px solid red;
+}
+.shop-input-seach:focus{
+
+    box-shadow: none;
+    border: 2px solid red;
+}
+
 .card{
     font-family: rmv,sans-serif;
     text-align: center;

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('status');
             $table->decimal('total_price',6,2);
             $table->string('session_id');
+            $table->string('payment_intent')->nullable();
             $table->foreignId('address_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

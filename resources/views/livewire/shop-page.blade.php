@@ -75,29 +75,36 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-12 col-lg-10 d-flex flex-wrap justify-content-start align-items-stretch gap-2 pb-3"
-             id="content">
-            @foreach($products as $product)
-                <a class="text-decoration-none text-black mx-auto mb-3"
-                   href="{{ route('frontend.show',$product->id) }}">
-                    <div class="card h-100" style="width: 19rem">
-                        <img alt="shoe" class="card-img-top" src="{{ asset($product->photo->file) }}">
-                        <div class="card-body d-flex flex-column">
-                            <h3 class="card-title">{{ $product->name }}</h3>
-                            <p>by {{$product->brand->name}}</p>
-                            <p>&euro; {{ $product->price }}</p>
-                            <div class="py-3 mt-auto">
-                                @if($cart->where('id',$product->id)->count())
-                                    <p>In cart</p>
-                                @else
-                                    <button class="btn-add-cart">More Info</button>
-                                @endif
+        <div class="col-12 col-lg-10">
+            <div class="form-floating mb-3 mt-2">
+                <input type="text" class="form-control shop-input-seach" id="searchProducts" placeholder="Search" wire:model="searchProduct">
+                <label class="ff-rmv" for="searchProducts">Search</label>
+            </div>
+            <div class="d-flex flex-wrap justify-content-start align-items-stretch gap-2 pb-3"
+                 id="content">
+                @foreach($products as $product)
+                    <a class="text-decoration-none text-black mx-auto mb-3"
+                       href="{{ route('frontend.show',$product->id) }}">
+                        <div class="card h-100" style="width: 19rem">
+                            <img alt="shoe" class="card-img-top" src="{{ asset($product->photo->file) }}">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title">{{ $product->name }}</h3>
+                                <p>by {{$product->brand->name}}</p>
+                                <p>&euro; {{ $product->price }}</p>
+                                <div class="py-3 mt-auto">
+                                    @if($cart->where('id',$product->id)->count())
+                                        <p>In cart</p>
+                                    @else
+                                        <button class="btn-add-cart">More Info</button>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            @endforeach
+                    </a>
+                @endforeach
+            </div>
         </div>
+
         {{$products->links()}}
     </section>
 </div>

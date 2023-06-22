@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
     <title>Awesome Sneakers</title>
     @livewireStyles
-
+    <script src="https://kit.fontawesome.com/0f65c70cea.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-livewire-alert::scripts />
     <link href="{{asset('css/style.css')}}" rel="stylesheet">

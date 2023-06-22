@@ -124,7 +124,7 @@ class CartController extends Controller
     public function success()
     {
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
-
+        $cartItems = Cart::content();
         try {
             $session = $stripe->checkout->sessions->retrieve($_GET['session_id']);
 
@@ -132,19 +132,19 @@ class CartController extends Controller
                 throw new NotFoundException();
             }
             $customer = $session->customer_details;
-
             $order = Order::where('session_id', $session->id)->first();
             if (!$order) {
                 throw new NotFoundHttpException();
             }
-            if ($order->status == 'unpaid') {
+            if ($order->status == 'unpaid' && $session->payment_intent) {
+                $order->payment_intent = $session->payment_intent;
                 $order->status = 'paid';
                 $order->save();
             }
             //clear cart content n after success order
             Cart::destroy();
 
-            return view('checkout.checkout-success', compact('customer'));
+            return view('checkout.checkout-success', compact('customer','cartItems','order'));
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
@@ -185,7 +185,8 @@ class CartController extends Controller
                 $sessionId = $session->id;
 
                 $order = Order::where('session_id', $session->id)->first();
-                if ($order && $order->status == 'unpaid') {
+                if ($order && $order->status == 'unpaid' && $session->payment_intent) {
+                    $order->payment_intent = $session->payment_intent;
                     $order->status = 'paid';
                     $order->save();
                     //send email to customer

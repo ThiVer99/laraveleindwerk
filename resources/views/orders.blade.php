@@ -11,40 +11,53 @@
                     @else
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             @foreach($orders as $order)
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$order->id}}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                        {{$order->created_at}} - {{$order->status}} - &euro;{{$order->total_price}}
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapse{{$order->id}}" class="accordion-collapse collapse">
-                                    <div class="accordion-body d-flex flex-wrap gap-2">
-                                        @foreach($order->products as $orderItem)
-                                            <a class="text-decoration-none text-black"
-                                               href="{{ route('frontend.show',$orderItem->id) }}">
-                                                <div class="card h-100" style="width: 19rem">
-                                                    <div class="card-body d-flex flex-column">
-                                                        <p>Name: {{ $orderItem->name }}</p>
-                                                        <p>Price per item: &euro; {{ $orderItem->price }}</p>
-                                                        <p>Total price: &euro; {{ $orderItem->price * $orderItem->pivot->quantity}}</p>
-                                                        <p>Color: {{ implode(' / ', $orderItem->colors->pluck('name')->toArray()) }}</p>
-                                                        <p>Size: {{$sizes[$orderItem->pivot->size_id -1 ]->name}}</p>
-                                                        <p>Quantity: {{$orderItem->pivot->quantity}}</p>
-                                                        <div class="py-3 mt-auto">
-                                                            <button class="btn-add-cart">More Info</button>
-                                                        </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <div class="accordion-button" type="button" data-bs-toggle="collapse"
+                                             data-bs-target="#panelsStayOpen-collapse{{$order->id}}"
+                                             aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            <div class="d-flex flex-column">
+                                                <p>Order date: {{$order->created_at}}</p>
+                                                <div>
+                                                    @foreach($order->products as $product)
+                                                        <img width="100px" class="rounded rounded-3 me-3"
+                                                             src="{{$product->photo->file}}" alt="product foto">
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="panelsStayOpen-collapse{{$order->id}}" class="accordion-collapse collapse">
+                                        <div class="accordion-body d-flex flex-column gap-2">
+                                            @foreach($order->products as $product)
+                                                <div class="row py-4 position-relative">
+                                                    <div class="col-4 col-lg-2">
+                                                        <a href="{{ route('frontend.show',$product->id) }}">
+                                                            <img alt="shoe" class="img-fluid border-cart-item"
+                                                                 src="{{$product->photo->file}}">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-8 col-lg-6 row">
+                                                        <p>Name: {{ $product->name }}</p>
+                                                        <p>Price: &euro; {{ $product->price }}</p>
+                                                        <p>Size: {{$sizes[$product->pivot->size_id -1 ]->name}}</p>
+                                                        <p class="m-0">
+                                                            Color: {{ implode(' / ', $product->colors->pluck('name')->toArray()) }}</p>
+                                                    </div>
+                                                    <div class="col-4 col-lg-4 py-3 py-lg-0">
+                                                        <p>Amount: {{ $product->pivot->quantity }}</p>
+                                                        <p>Total:&euro; {{ $product->price * $product->pivot->quantity }}</p>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        @endforeach
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     @endif
                 </div>
+            </div>
         </div>
-    </div>
 
 @endsection
