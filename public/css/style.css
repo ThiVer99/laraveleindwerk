@@ -387,6 +387,16 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-deny {
 }
 
 /*einde shoppingcart*/
+/*begin orders*/
+.accordion-border{
+    border: 2px solid black;
+}
+.accordion-order-button:not(.collapsed){
+    background-color: #ffffff;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+/*einde orders*/
 /*begin login*/
 .bg-red{
     background-color: darkred;
@@ -421,9 +431,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-deny {
     transition-duration: 0.2s;
 }
 /*einde login*/
-/*begin customer service*/
 
-/*einde customer service*/
 /*begin media queries*/
 @media (max-width: 768px) {
     .contact-input-message {

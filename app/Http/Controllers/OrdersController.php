@@ -15,7 +15,7 @@ class OrdersController extends Controller
 
     public function frontendIndex()
     {
-        $orders = Order::where('user_id',Auth::id())->with('products')->get();
+        $orders = Order::where('user_id',Auth::id())->with('products','products.photo','products.colors')->get();
         $colors = Color::all();
         $sizes = Size::all();
         return view("orders" ,compact('orders','sizes','colors'));

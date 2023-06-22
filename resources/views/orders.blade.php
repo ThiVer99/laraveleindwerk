@@ -9,18 +9,18 @@
                     @if($orders->isEmpty())
                         no orders
                     @else
-                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion mb-3" id="accordionPanelsStayOpenExample">
                             @foreach($orders as $order)
-                                <div class="accordion-item">
+                                <div class="accordion-item accordion-border rounded-0">
                                     <div class="accordion-header">
-                                        <div class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        <div class="accordion-button accordion-order-button collapsed" type="button" data-bs-toggle="collapse"
                                              data-bs-target="#panelsStayOpen-collapse{{$order->id}}"
                                              aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                             <div class="d-flex flex-column">
-                                                <p>Order date: {{$order->created_at}}</p>
+                                                <p class="text-black">Order date: {{$order->created_at}}</p>
                                                 <div>
                                                     @foreach($order->products as $product)
-                                                        <img width="100px" class="rounded rounded-3 me-3"
+                                                        <img width="100px" class="me-3 border-cart-item"
                                                              src="{{$product->photo->file}}" alt="product foto">
                                                     @endforeach
                                                 </div>
