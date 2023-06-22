@@ -133,6 +133,9 @@ class CartController extends Controller
             }
             $customer = $session->customer_details;
             $order = Order::where('session_id', $session->id)->first();
+            if (Auth::id() != $order->user_id) {
+                throw new NotFoundHttpException();
+            }
             if (!$order) {
                 throw new NotFoundHttpException();
             }
