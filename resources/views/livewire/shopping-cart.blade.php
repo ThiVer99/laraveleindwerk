@@ -22,7 +22,7 @@
                             <div class="col-4 offset-4 offset-lg-0 col-lg-3 py-3 py-lg-0">
                                 <div class="d-flex align-items-center">
                                     <label>quantity: </label>
-                                    <input wire:change="changeQuantity('{{$cartItem->rowId}}',{{$cartItem->id}})" wire:model="quantity.{{$cartItem->id}}" class="form-control ms-2" type="number" min="1">
+                                    <input wire:change="changeQuantity('{{$cartItem->rowId}}',{{$cartItem->id}},{{$cartItem->options->size->id}})" wire:model="quantity.{{$cartItem->id}}.{{$cartItem->options->size->id}}" class="form-control ms-2" type="number" min="1">
                                 </div>
                                 @error('quantity.' . $cartItem->id)
                                     <p class="text-danger">{{ $message }}</p>

@@ -16,7 +16,7 @@ class ShoppingCart extends Component
     public function mount(){
         $this->products = Cart::content();
         foreach ($this->products as $product){
-            $this->quantity[$product->id] = $product->qty;
+            $this->quantity[$product->id][$product->options->size->id] = $product->qty;
         }
     }
 
@@ -37,17 +37,17 @@ class ShoppingCart extends Component
             'toast' => true,
         ]);
     }
-    public function changeQuantity($rowId,$id){
+    public function changeQuantity($rowId,$id,$sizeId){
         $validatedQuantity = $this->validate([
-            'quantity.' . $id => ['required','integer', 'numeric'],
+            'quantity.' . $id .'.'. $sizeId=> ['required','integer', 'numeric'],
         ], [
-            'quantity.' . $id . '.integer' => 'quantity cant be a decimal number',
-            'quantity.' . $id . '.required' => 'quantity is required',
+            'quantity.' . $id .'.'. $sizeId . '.integer' => 'quantity cant be a decimal number',
+            'quantity.' . $id .'.'. $sizeId . '.required' => 'quantity is required',
         ]);
 
-        Cart::update($rowId, $validatedQuantity['quantity'][$id]);
+        Cart::update($rowId, $validatedQuantity['quantity'][$id][$sizeId]);
         $this->emit('cart_updated');
-        $this->alert('success', 'Quantity changed to ' . $validatedQuantity['quantity'][$id] . '!', [
+        $this->alert('success', 'Quantity changed to ' . $validatedQuantity['quantity'][$id][$sizeId] . '!', [
             'position' => 'center',
             'timer' => 3000,
             'toast' => true,
