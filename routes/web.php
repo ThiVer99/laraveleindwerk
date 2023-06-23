@@ -42,7 +42,6 @@ Route::post('/', [CartController::class, 'store'])->name('cart.store');
 Route::get("/cart", [CartController::class, "index"])->name("frontend.cart");
 Route::get("/order-details", [CartController::class, "orderDetails"])->name("frontend.orderDetails");
 Route::get("/orders", [OrdersController::class, "frontendIndex"])->name("frontend.orders");
-
 Route::post("/checkout", [CartController::class, "checkout"])->name("frontend.checkout");
 Route::get("/success", [CartController::class, "success"])->name("frontend.checkout.success");
 Route::get("/cancel", [CartController::class, "cancel"])->name("frontend.checkout.cancel");

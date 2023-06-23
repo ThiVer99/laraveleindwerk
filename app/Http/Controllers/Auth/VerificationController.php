@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Support\Facades\Session;
 
 class VerificationController extends Controller
 {
@@ -26,7 +27,15 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        // maakt een session aan dat er voor zorgt dat er een melding
+        // is in de homepage wanneer de user zijn email verified
+        Session::flash('verifyEmail');
+
+        // redirect to home
+        return RouteServiceProvider::HOME;
+    }
 
     /**
      * Create a new controller instance.

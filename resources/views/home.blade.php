@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(session('verifyEmail'))
+        <script>
+            Swal.fire({
+                position: "center",
+                icon: 'success',
+                title: 'Email verified!',
+                toast: true,
+                timer: 3000,
+                showConfirmButton: false,
+            })
+        </script>
+    @endif
     <div class="vh-100" id="home-header">
         <img src="{{asset('../images/header.jpg')}}" class="img-fluid vw-100" alt="">
         <header class="vh-100 col-12 col-lg-8 offset-lg-2 position-relative">
