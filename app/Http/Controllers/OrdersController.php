@@ -23,6 +23,7 @@ class OrdersController extends Controller
 
     public function show($id){
         $order = Order::findOrfail($id);
-        return view('admin.orders.show',compact('order'));
+        $sizes = Size::all();
+        return view('admin.orders.show',compact('order','sizes'));
     }
 }

@@ -21,6 +21,7 @@
         <tr>
             <th>Product Id</th>
             <th>Name</th>
+            <th>Size</th>
             <th>Price per unit</th>
             <th>Quantity</th>
             <th>Price x quantity</th>
@@ -31,6 +32,7 @@
             <tr>
                 <td>{{$product->id}}</a></td>
                 <td>{{$product->name}}</td>
+                <td>{{$sizes[$product->pivot->size_id-1]->name}}</td>
                 <td>&euro;{{$product->price}}</td>
                 <td>{{$product->pivot->quantity}}</td>
                 <td>&euro;{{$product->pivot->quantity * $product->price}}</td>
