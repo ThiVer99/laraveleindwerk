@@ -343,6 +343,18 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-deny {
     background-color: black;
     transition-duration: 0.2s;
 }
+.btn-clear-cart{
+    font-family: rmv,sans-serif;
+    color: white;
+    padding: 10px;
+    background-color: red;
+    transition-duration: 0.2s;
+    border: none;
+}
+.btn-clear-cart:hover{
+    background-color: black;
+    transition-duration: 0.2s;
+}
 .btn-checkout {
     font-family: rmv,sans-serif;
     color: white;

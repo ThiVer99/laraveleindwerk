@@ -37,6 +37,14 @@ class ShoppingCart extends Component
             'toast' => true,
         ]);
     }
+    public function clearCart(){
+        Cart::destroy();
+        $this->alert('error', 'cart cleared!', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
+    }
     public function changeQuantity($rowId,$id,$sizeId){
         $validatedQuantity = $this->validate([
             'quantity.' . $id .'.'. $sizeId=> ['required','integer', 'numeric'],
