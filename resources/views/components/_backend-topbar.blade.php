@@ -5,30 +5,7 @@
         <i class="fa fa-bars"></i>
     </button>
 
-    <!-- Topbar Search -->
-    @if(isset($fillableFields) && !empty($fillableFields))
-    <form method="GET" action="#"
-          class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search w-50">
-        <div class="input-group">
-            <input name="search" type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                   aria-label="Search" aria-describedby="basic-addon2" value="{{ Request::get('search') }}">
 
-                <div class="d-flex" style="background:#f8f9fc;">
-                    @foreach($fillableFields as $field)
-                        <div class="form-check mr-2">
-                            <input class="form-check-input" type="checkbox" value="{{ $field }}" id="{{ $field }}" name="fields[]" {{ in_array($field, (array)Request::get('fields', [])) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="{{ $field }}">{{ ucfirst($field) }} </label>
-                        </div>
-                    @endforeach
-                </div>
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search fa-sm"></i></button>
-            </div>
-        </div>
-    </form>
-    @endif
-    <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
