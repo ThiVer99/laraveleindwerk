@@ -17,7 +17,16 @@
                                              data-bs-target="#panelsStayOpen-collapse{{$order->id}}"
                                              aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                             <div class="d-flex flex-column">
-                                                <p class="text-black">Order date: {{$order->created_at}}</p>
+                                                <p class="text-black">Order date: {{$order->created_at}} - STATUS:
+                                                    <span class="
+                                                        @if($order->status == "paid")
+                                                            text-success
+                                                        @else
+                                                            text-danger
+                                                        @endif">
+                                                            {{ucfirst($order->status)}}
+                                                    </span>
+                                                </p>
                                                 <div>
                                                     @foreach($order->products as $product)
                                                         <img width="100px" class="me-3 border-cart-item"
