@@ -63,6 +63,7 @@ Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]
     Route::get('products/brand/{id}', [ProductsController::class, 'productsPerBrand'])->name('admin.productsPerBrand');
     //Order routes
     Route::resource('orders', OrdersController::class);
+    Route::get('orders/{id}', [OrdersController::class,'show'])->name('orders.show');
     //Brand Routes
     Route::resource('brands', AdminBrandsController::class);
     Route::post('brands/restore/{brand:id}', [AdminBrandsController::class, 'brandRestore'])->name('brands.restore');

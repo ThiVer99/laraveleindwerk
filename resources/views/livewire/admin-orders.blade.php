@@ -19,11 +19,11 @@
                 <th>Id</th>
                 <th>User</th>
                 <th>Status</th>
+                <th>Payment Intend</th>
                 <th>Price</th>
                 <th>Number of Products</th>
-                <th>Address</th>
                 <th>Created At</th>
-                <th>Updated At</th>
+                <th>actions</th>
             </tr>
             </thead>
             <tbody>
@@ -31,12 +31,12 @@
                 <tr>
                     <td>{{$order->id}}</td>
                     <td>{{$order->user->name}}</td>
-                    <td  class="@if($order->status == 'unpaid') text-danger @else text-success @endif" >{{$order->status}}</td>
-                    <td>{{$order->total_price}}</td>
+                    <td class="@if($order->status == 'unpaid') text-danger @else text-success @endif" >{{$order->status}}</td>
+                    <td>{{$order->payment_intent}}</td>
+                    <td>&euro;{{$order->total_price}}</td>
                     <td>{{$order->products->count()}}</td>
-                    <td>{{$order->address->address .' '. $order->address->number .', '.$order->address->postal_code.' '. $order->address->city . ', ' . $order->address->country}}</td>
                     <td>{{$order->created_at}}</td>
-                    <td>{{$order->updated_at}}</td>
+                    <td><a href="{{route('orders.show',$order->id)}}"><i class="fa-solid fa-eye"></i></a></td>
                 </tr>
             @endforeach
             </tbody>
