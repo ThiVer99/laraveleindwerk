@@ -11,7 +11,7 @@
             })
         </script>
     @endif
-    <div class="row min-vh-100 px-1 py-4 d-flex align-items-center">
+    <div class="row min-vh-100 px-1 py-4 d-flex align-items-center bg-white">
         <div class="col-12 col-lg-4 offset-lg-2">
             <img alt="shoe" class="img-fluid" src="{{$product->photo->file}}">
         </div>
