@@ -91,7 +91,7 @@
                     @if($product->brand)
                         {{$product->brand->name}}
                     @else
-                        <p class="text-danger">Deleted Brand</p>
+                        <p>Deleted Brand</p>
                     @endif
                 </td>
                 <td>{{$product->name}}</td>
@@ -100,7 +100,7 @@
                     @if($product->gender)
                         {{$product->gender->name}}
                     @else
-                        <p class="text-danger">Deleted Gender</p>
+                        <p>Deleted Gender</p>
                     @endif
                 </td>
                 <td>

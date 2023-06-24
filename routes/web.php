@@ -50,8 +50,6 @@ Route::post("/webhook",[CartController::class,'webhook'])->name('frontend.checko
 Route::get('contactformulier', [ContactController::class, 'create'])->name('contact.create');
 Route::post('contactformulier', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('/itunes', [ItunesController::class, 'index'])->name('itunes.index');
-
 /**backend**/
 
 Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]], function () {

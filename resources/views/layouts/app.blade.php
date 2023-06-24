@@ -1,6 +1,6 @@
 @include('components._frontend-header')
 
-<body class="container-fluid">
+<body class="container-fluid bg-red">
 
 <div class="row">
     <!-- start NAV -->

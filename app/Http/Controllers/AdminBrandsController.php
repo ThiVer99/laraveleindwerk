@@ -105,7 +105,9 @@ class AdminBrandsController extends Controller
     {
         //
         try {
-            Brand::findOrFail($id)->delete();
+            $brand = Brand::findOrFail($id);
+            $brand->products()->delete();
+            $brand->delete();
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'brand not found.'], 404);
         }
@@ -120,9 +122,11 @@ class AdminBrandsController extends Controller
 
     public function brandRestore($id){
         try {
-            Brand::onlyTrashed()->where('id', $id)->restore();
+            $brand = Brand::onlyTrashed()->where('id', $id)->first();
+            $brand->products()->onlyTrashed()->restore();
+            $brand->restore();
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'brand not found.'], 404);
+            return response(    )->json(['message' => 'brand not found.'], 404);
         }
 
         return redirect()->route('brands.index')->with([

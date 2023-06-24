@@ -102,7 +102,9 @@ class AdminGendersController extends Controller
     public function destroy($id)
     {
         try {
-            Gender::findOrFail($id)->delete();
+            $gender = Gender::findOrFail($id);
+            $gender->products()->delete();
+            $gender->delete();
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'gender not found.'], 404);
         }
@@ -116,7 +118,9 @@ class AdminGendersController extends Controller
     }
     public function genderRestore($id){
         try {
-            Gender::onlyTrashed()->where('id', $id)->restore();
+            $gender = Gender::onlyTrashed()->where('id', $id)->first();
+            $gender->products()->onlyTrashed()->restore();
+            $gender->restore();
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'gender not found.'], 404);
         }
