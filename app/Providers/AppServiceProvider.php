@@ -31,13 +31,20 @@ class AppServiceProvider extends ServiceProvider
         //
         //Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
-//
-        $usersCount = User::count();
-        $productCount = Product::count();
-        $orderCount = Order::count();
 
-        view()->share('usersCount', $usersCount);
-        view()->share('productsCount', $productCount);
-        view()->share('ordersCount', $orderCount);
+        view()->composer([
+            "*._backend-cards"
+            ],
+        function ($view){
+            $usersCount = User::count();
+            $productCount = Product::count();
+            $orderCount = Order::count();
+
+            $view->with([
+                'usersCount' => $usersCount,
+                'productsCount' => $productCount,
+                'ordersCount' => $orderCount,
+            ]);
+        });
     }
 }
