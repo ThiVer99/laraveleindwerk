@@ -129,7 +129,7 @@ nav {
     overflow: hidden;
 }
 
-.nav-link:hover {
+.nav-link:hover,.nav-link:focus {
     color: red;
     transition-duration: 0.2s;
     cursor: pointer;
@@ -147,7 +147,7 @@ nav {
     position: absolute;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,.nav-link:focus::after {
     width: 100%;
 }
 

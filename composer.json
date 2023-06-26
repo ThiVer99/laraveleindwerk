@@ -19,7 +19,6 @@
         "stripe/stripe-php": "^10.14"
     },
     "require-dev": {
-        "beyondcode/laravel-query-detector": "^1.7",
         "fakerphp/faker": "^1.9.1",
         "itsgoingd/clockwork": "^5.1",
         "laravel/pint": "^1.0",

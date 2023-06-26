@@ -45,7 +45,7 @@
             <div>
                 <p class="ff-rmv-bold">Price</p>
                 <input wire:model="minPrice" class="form-control my-2" type="number">
-                <span class="ff-rmv">tot</span>
+                <span class="ff-rmv">between</span>
                 <input wire:model="maxPrice" class="form-control my-2" type="number">
             </div>
             <!-- end price -->
@@ -84,7 +84,7 @@
                  id="content">
                 @foreach($products as $product)
                     <a class="text-decoration-none text-black mx-auto mb-3"
-                       href="{{ route('frontend.show',$product->id) }}">
+                       href="{{ route('frontend.show',$product) }}">
                         <div class="card h-100" style="width: 19rem">
                             <img alt="shoe" class="card-img-top" src="{{ asset($product->photo->file) }}">
                             <div class="card-body d-flex flex-column">

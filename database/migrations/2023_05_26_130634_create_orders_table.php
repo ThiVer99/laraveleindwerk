@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->unsigned()->constrained()->cascadeOnDelete();
             $table->string('status');
-            $table->decimal('total_price',6,2);
+            $table->decimal('total_price',10,2,true);
             $table->string('session_id');
             $table->string('payment_intent')->nullable();
             $table->foreignId('address_id')->unsigned()->constrained()->cascadeOnDelete();

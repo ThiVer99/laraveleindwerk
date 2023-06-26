@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
 Route::get("/shop", [ShopController::class, "index"])->name("frontend.shop");
-Route::get('/shop/{id}', [ShopController::class, 'show'])->name('frontend.show');
+Route::get('/shop/{product:name}', [ShopController::class, 'show'])->name('frontend.show');
 Route::post('/', [CartController::class, 'store'])->name('cart.store');
 Route::get("/cart", [CartController::class, "index"])->name("frontend.cart");
 Route::get("/order-details", [CartController::class, "orderDetails"])->name("frontend.orderDetails");
@@ -78,10 +78,9 @@ Route::group(["prefix" => "admin", "middleware" => ['auth', 'verified' ,"admin"]
     Route::resource('productcategories', ProductCategoryController::class);
     Route::post('productcategories/restore/{productcategory:id}', [ProductCategoryController::class, 'productCategoryRestore'])->name('productcategories.restore');
 
-    Route::group(["middleware" => 'admin'], function () {
-        Route::resource("users", AdminUsersController::class);
-        Route::post('users/restore/{user}', [AdminUsersController::class, 'userRestore'])->name('admin.userrestore');
-    });
+    Route::resource("users", AdminUsersController::class);
+    Route::post('users/restore/{user}', [AdminUsersController::class, 'userRestore'])->name('admin.userrestore');
+
 });
 
 Auth::routes(['verify' => true]);
