@@ -28,6 +28,19 @@
             </div>
             <!-- end genders -->
             <hr>
+            <!-- start categories -->
+            <div>
+                <p class="ff-rmv-bold">Categories</p>
+                @foreach($categories as $category)
+                    <div class="form-check">
+                        <input wire:model="selectedCategories" class="form-check-input" id="category{{$category->id}}" type="checkbox"
+                               value="{{$category->id}}">
+                        <label class="ff-rmv" for="category{{$category->id}}">{{$category->name}}</label>
+                    </div>
+                @endforeach
+            </div>
+            <!-- end categories -->
+            <hr>
             <!-- start brands -->
             <div>
                 <p class="ff-rmv-bold">Brands</p>

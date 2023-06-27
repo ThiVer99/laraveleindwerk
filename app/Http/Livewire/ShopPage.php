@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Gender;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Size;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class ShopPage extends Component
     ];
     public $selectedGenders = [];
     public $selectedBrands = [];
+    public $selectedCategories = [];
     public $selectedColors = [];
     public $selectedSizes = [];
     public $searchProduct;
@@ -53,6 +55,12 @@ class ShopPage extends Component
                         $query->where('color_id', $color);
                     });
                 }
+            })->when($this->selectedCategories,function ($query){
+                foreach ($this->selectedCategories as $category){
+                    $query->whereHas('productcategories', function ($query) use ($category){
+                        $query->where('productcategory_id', $category);
+                    });
+                }
             })->when($this->selectedSizes, function ($query) {
                 $query->whereHas('sizes', function ($query) {
                     $query->where('size_id', $this->selectedSizes);
@@ -69,10 +77,11 @@ class ShopPage extends Component
         $colors = Color::all();
         $sizes = Size::all();
         $genders = Gender::all();
+        $categories = ProductCategory::all();
         //cart zodat er kan gecheckt worden als het artikel al aanwezig is in de cart
         $cart = Cart::content();
 
-        return view('livewire.shop-page', compact('products', 'genders', 'brands', 'colors', 'sizes', 'cart'));
+        return view('livewire.shop-page', compact('products', 'genders', 'brands', 'colors', 'sizes', 'cart','categories'));
     }
 
     public function loginRedirect()
