@@ -15,77 +15,121 @@
                 <option value="lowest">Lowest Price</option>
             </select>
             <hr>
-            <!-- start genders -->
-            <div>
-                <p class="ff-rmv-bold">Genders</p>
-                @foreach($genders as $gender)
-                    <div class="form-check">
-                        <input wire:model="selectedGenders" class="form-check-input" id="gender{{$gender->id}}" type="checkbox"
-                               value="{{$gender->id}}">
-                        <label class="ff-rmv" for="gender{{$gender->id}}">{{$gender->name}}</label>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <!-- start price -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button accordion-custom collapsed ff-rmv-bold ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                            Price
+                        </button>
+                    </h2>
+                    <div wire:ignore.self id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                        <!-- start price -->
+                        <div>
+                            <input wire:model="minPrice" class="form-control my-2" type="number">
+                            <span class="ff-rmv">between</span>
+                            <input wire:model="maxPrice" class="form-control my-2" type="number">
+                        </div>
+
                     </div>
-                @endforeach
-            </div>
-            <!-- end genders -->
-            <hr>
-            <!-- start categories -->
-            <div>
-                <p class="ff-rmv-bold">Categories</p>
-                @foreach($categories as $category)
-                    <div class="form-check">
-                        <input wire:model="selectedCategories" class="form-check-input" id="category{{$category->id}}" type="checkbox"
-                               value="{{$category->id}}">
-                        <label class="ff-rmv" for="category{{$category->id}}">{{$category->name}}</label>
+                </div>
+                <!-- end price -->
+                <!-- start genders -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button accordion-custom collapsed ff-rmv-bold ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Genders
+                        </button>
+                    </h2>
+                    <div wire:ignore.self id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div>
+                            @foreach($genders as $gender)
+                                <div class="form-check">
+                                    <input wire:model="selectedGenders" class="form-check-input" id="gender{{$gender->id}}" type="checkbox"
+                                           value="{{$gender->id}}">
+                                    <label class="ff-rmv" for="gender{{$gender->id}}">{{$gender->name}}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                @endforeach
-            </div>
-            <!-- end categories -->
-            <hr>
-            <!-- start brands -->
-            <div>
-                <p class="ff-rmv-bold">Brands</p>
-                @foreach($brands as $brand)
-                    <div class="form-check">
-                        <input wire:model="selectedBrands" class="form-check-input" id="brand{{$brand->id}}" type="checkbox"
-                               value="{{$brand->id}}">
-                        <label class="ff-rmv" for="brand{{$brand->id}}">{{$brand->name}}</label>
+                </div>
+                <!-- end genders -->
+                <!-- start categories -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button accordion-custom collapsed ff-rmv-bold ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Categories
+                        </button>
+                    </h2>
+                    <div wire:ignore.self id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div>
+                            @foreach($categories as $category)
+                                <div class="form-check">
+                                    <input wire:model="selectedCategories" class="form-check-input" id="category{{$category->id}}" type="checkbox"
+                                           value="{{$category->id}}">
+                                    <label class="ff-rmv" for="category{{$category->id}}">{{$category->name}}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                @endforeach
-            </div>
-            <!-- end brands -->
-            <hr>
-            <!-- start price -->
-            <div>
-                <p class="ff-rmv-bold">Price</p>
-                <input wire:model="minPrice" class="form-control my-2" type="number">
-                <span class="ff-rmv">between</span>
-                <input wire:model="maxPrice" class="form-control my-2" type="number">
-            </div>
-            <!-- end price -->
-            <hr>
-            <!-- start colors -->
-            <div>
-                <p class="ff-rmv-bold">Colors</p>
-                @foreach($colors as $color)
-                    <div class="form-check">
-                        <input wire:model="selectedColors" class="form-check-input" id="color{{$color->name}}"
-                               type="checkbox" value="{{$color->id}}">
-                        <label class="ff-rmv" for="color{{$color->name}}">{{$color->name}}</label>
+                </div>
+                <!-- end categories -->
+                <!-- start brands -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button accordion-custom collapsed ff-rmv-bold ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            Brands
+                        </button>
+                    </h2>
+                    <div wire:ignore.self id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div>
+                            @foreach($brands as $brand)
+                                <div class="form-check">
+                                    <input wire:model="selectedBrands" class="form-check-input" id="brand{{$brand->id}}" type="checkbox"
+                                           value="{{$brand->id}}">
+                                    <label class="ff-rmv" for="brand{{$brand->id}}">{{$brand->name}}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                @endforeach
-            </div>
-            <!-- end colors -->
-            <hr>
-            <!-- start sizes -->
-            <div>
-                <p class="ff-rmv-bold">Sizes</p>
-                @foreach($sizes as $size)
-                    <div class="form-check">
-                        <input wire:model="selectedSizes" class="form-check-input" id="size{{$size->name}}" type="checkbox"
-                               value="{{$size->id}}">
-                        <label class="ff-rmv" for="size{{$size->name}}">{{$size->name}}</label>
+                </div>
+                <!-- end brands -->
+                <!-- start colors -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                        <button class="accordion-button accordion-custom collapsed ff-rmv-bold ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                            Color
+                        </button>
+                    </h2>
+                    <div wire:ignore.self id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                        @foreach($colors as $color)
+                            <div class="form-check">
+                                <input wire:model="selectedColors" class="form-check-input" id="color{{$color->name}}"
+                                       type="checkbox" value="{{$color->id}}">
+                                <label class="ff-rmv" for="color{{$color->name}}">{{$color->name}}</label>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+                <!-- end colors -->
+                <!-- start size -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSix">
+                        <button class="accordion-button accordion-custom collapsed ff-rmv-bold ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                            Sizes
+                        </button>
+                    </h2>
+                    <div wire:ignore.self id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                        @foreach($sizes as $size)
+                            <div class="form-check">
+                                <input wire:model="selectedSizes" class="form-check-input" id="size{{$size->name}}" type="checkbox"
+                                       value="{{$size->id}}">
+                                <label class="ff-rmv" for="size{{$size->name}}">{{$size->name}}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- end size -->
             </div>
         </div>
         <div class="col-12 col-lg-10">

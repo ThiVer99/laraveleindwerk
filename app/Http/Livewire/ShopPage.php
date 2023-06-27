@@ -40,6 +40,7 @@ class ShopPage extends Component
     {
         $this->maxPrice = Product::max('price');
         $this->minPrice = Product::min('price');
+        $this->sortBy = 'new';
     }
 
     public function render()

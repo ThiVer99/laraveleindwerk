@@ -276,7 +276,15 @@ footer {
 }
 
 /*begin shop-header*/
-
+/*begin shop filters*/
+.accordion-custom{
+    --bs-accordion-active-color: red;
+    --bs-accordion-active-bg: white;
+}
+.accordion-custom:focus{
+   box-shadow: none;
+}
+/*end shop filters*/
 /*begin shop-content*/
 .shop-input-seach{
     border: 2px solid black;
