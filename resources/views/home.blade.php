@@ -19,6 +19,8 @@
                 position: "center",
                 icon: 'error',
                 title: 'Something went wrong',
+                imageUrl: 'https://media.giphy.com/media/1ZnG0vysD6x8RMUnsG/giphy.gif',
+                imageAlt: 'gif',
                 toast: true,
                 timer: 3000,
                 showConfirmButton: false,
