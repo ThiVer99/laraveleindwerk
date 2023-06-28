@@ -24,7 +24,7 @@
                                 <p>Size: {{ $cartItem->options->size->name }}</p>
                                 <p class="m-0">Color: {{ implode('/', $cartItem->model->colors->pluck('name')->toArray()) }}</p>
                             </div>
-                            <div class="col-4 offset-4 offset-lg-0 col-lg-3 py-3 py-lg-0">
+                            <div class="col-8 offset-4 offset-lg-0 col-lg-3 py-3 py-lg-0">
                                 <div class="d-flex align-items-center">
                                     <label>quantity: </label>
                                     <input wire:change="changeQuantity('{{$cartItem->rowId}}',{{$cartItem->id}},{{$cartItem->options->size->id}})" wire:model="quantity.{{$cartItem->id}}.{{$cartItem->options->size->id}}" class="form-control ms-2" type="number" min="1">
@@ -33,8 +33,8 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="col-4 col-lg-2 py-3 py-lg-0">
-                                <p>&euro; {{ $cartItem->price * $cartItem->qty }}</p>
+                            <div class="col-8 offset-4 offset-lg-0 col-lg-2 py-3 py-lg-0">
+                                <p>&euro;{{ $cartItem->price * $cartItem->qty }}</p>
                             </div>
                             <div class="col-2 offset-9 offset-lg-0 col-lg-1 cart-delete">
                                 <button wire:click="remove('{{$cartItem->rowId}}')" type="submit" class="btn-delete">X</button>

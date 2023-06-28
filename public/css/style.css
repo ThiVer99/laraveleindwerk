@@ -222,17 +222,20 @@ footer {
 .contact-input {
     background: none;
     width: 100%;
-    border: 1px solid white;
+    border: 2px solid white;
     padding: 10px;
     transition-duration: 0.2s;
 
 }
 
 .contact-input:hover {
-    border: 4px solid white;
-    padding: 7px;
+    border: 2px solid red;
     transition-duration: 0.2s;
-    cursor: pointer;
+}
+
+.contact-input:focus,.contact-input:focus-visible {
+    border: 2px solid red;
+    transition-duration: 0.2s;
 }
 
 .contact-input-message {

@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
+    <div class="container vh-100">
+        <div class="row justify-content-center col-12 col-lg-4 position-absolute top-50 start-50 translate-middle text-white">
+            <div class="col-md-8 text-center">
                     <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
                     <div class="card-body">
@@ -15,14 +14,13 @@
                         @endif
 
                         {{ __('Before proceeding, please check your email for a verification link.') }}
-                        {{ __('If you did not receive the email') }},
+                        {{ __('If you did not receive the email then click the button below') }}
                         <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                             @csrf
-                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>
-                            .
+                            <button type="submit" class="ff-rmv mt-3 btn btn-login">Request new verification email</button>
                         </form>
                     </div>
-                </div>
+
             </div>
         </div>
     </div>

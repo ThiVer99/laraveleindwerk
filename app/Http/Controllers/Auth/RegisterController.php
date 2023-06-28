@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Photo;
 use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -65,14 +66,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = Role::where('name','customer')->first();
+        request()->validate([
+            'name' => ['required', 'between:3,255'],
+            'email' => 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required',
+            'photo_id' => 'required',
+        ],
+            [
+                'name.required' => 'Name is required',
+                'email.between' => 'Email is required',
+                'password.required' => 'Password is required',
+                'password_confirmation.required' => 'You need to confirm your password',
+                'photo_id.required' => 'You have to upload a profile picture',
+            ]);
+        $role = Role::where('name', 'customer')->first();
+        $photo = null;
+
+        if ($file = request()->file("photo_id")) {
+            $path = $file->store("users");
+            $photo = Photo::create(["file" => $path]);
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'photo_id' => $photo ? $photo->id : null,
             'password' => Hash::make($data['password']),
-            'is_active'=>1
+            'is_active' => 1,
         ]);
-        $user->roles()->attach($role->id); //sync can you ook gebruiken
+
+        $user->roles()->attach($role->id);
         return $user;
     }
 }

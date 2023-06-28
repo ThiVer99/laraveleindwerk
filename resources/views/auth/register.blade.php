@@ -4,7 +4,7 @@
     <section class="vh-100 row bg-red">
         <div class="col-12 col-lg-4 position-absolute top-50 start-50 translate-middle">
             <h2 class="ff-rmv text-center text-white">Register</h2>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
                 <!-- name -->
                 <label class="text-white ff-rmv" for="name">Name:</label>
@@ -38,7 +38,14 @@
                 <input id="password-confirm" type="password" class="my-2 form-control login-input login"
                        name="password_confirmation" required autocomplete="new-password" placeholder="Confirm password">
                 <!-- login -->
-                <button type="submit" class="ff-rmv mt-3 btn btn-login">Log In</button>
+                <div class="form-group">
+                    <label class="ff-rmv text-white my-2" for="pass">Profile Picture:</label>
+                    <input type="file" name="photo_id" id="ChooseFile">
+                    @error('photo_id')
+                    <p class="text-warning fs-6">{{$message}}</p>
+                    @enderror
+                </div>
+                <button type="submit" class="ff-rmv mt-3 btn btn-login">Register</button>
             </form>
         </div>
     </section>

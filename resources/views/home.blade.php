@@ -13,6 +13,30 @@
             })
         </script>
     @endif
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                position: "center",
+                icon: 'error',
+                title: 'Something went wrong',
+                toast: true,
+                timer: 3000,
+                showConfirmButton: false,
+            })
+        </script>
+    @endif
+    @if(session('contactForm'))
+        <script>
+            Swal.fire({
+                position: "center",
+                icon: 'success',
+                title: 'Form sent!',
+                toast: true,
+                timer: 3000,
+                showConfirmButton: false,
+            })
+        </script>
+    @endif
     <div class="vh-100" id="home-header">
         <img src="{{asset('../images/header.jpg')}}" class="img-fluid vw-100" alt="">
         <header class="vh-100 col-12 col-lg-8 offset-lg-2 position-relative">
@@ -41,8 +65,8 @@
     </section>
     <section class="row align-items-center justify-content-center" id="shoeshuffle">
         <div class="bg-black col-12 col-lg-2 text-center" id="salediv">
-            <p class="text-white pb-2 ff-rmv">Final Sale 40%-60%</p>
-            <a class="btn-main-border ff-rmv" href="{{route('frontend.shop')}}">SHOP SALE</a>
+            <p class="text-white pb-2 ff-rmv">New products in store</p>
+            <a class="btn-main-border ff-rmv" href="{{route('frontend.shop')}}">SHOP NOW</a>
         </div>
     </section>
 @endsection
