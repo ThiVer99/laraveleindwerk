@@ -36,11 +36,17 @@
                     <a href="{{ route('register') }}" class="btn-add-cart">Register</a>
                 @endguest
                 @auth
-                    @if($inCart)
-                        <p>Size in cart</p>
+                    @if(auth()->user()->hasVerifiedEmail())
+                        <!-- Content to be displayed for verified users -->
+                        @if($inCart)
+                            <p>Size in cart</p>
+                        @else
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit" class="btn-add-cart">Add to Cart</button>
+                        @endif
                     @else
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <button type="submit" class="btn-add-cart">Add to Cart</button>
+                        <p>You need to verify your email before you can make a purchase</p>
+                        <a href="{{ route('verification.notice') }}" class="btn-add-cart">Go to verification page</a>
                     @endif
                 @endauth
             </form>
