@@ -7,10 +7,10 @@
             <header>
                 <h3 class="py-2 ff-rmv">ADDRESS</h3>
             </header>
-            <p>500 Terry Francois Street <br>
-                San Francisco, CA 94158 <br>
-                info@mysite.com <br>
-                Tel: 123-456-7890</p>
+            <p>Pierlapont 82 <br>
+                Zedelgem, 8210 <br>
+                info@awesomesneakers.com <br>
+                Tel: 0471280504</p>
             <div class="d-flex justify-content-evenly py-4">
                 <a class="text-white" href="https://facebook.com"><i class="fs-3 bi bi-facebook"></i></a>
                 <a class="text-white" href="https://twitter.com"><i class="fs-3 bi bi-twitter"></i></a>
