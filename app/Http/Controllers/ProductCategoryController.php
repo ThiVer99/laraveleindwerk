@@ -41,6 +41,14 @@ class ProductCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ],
+            [
+                'name.required' => 'category name is required',
+                'description.required' => 'description is required',
+            ]);
         ProductCategory::create($request->all());
         return redirect()->route('productcategories.index');
     }
@@ -79,6 +87,14 @@ class ProductCategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ],
+            [
+                'name.required' => 'category name is required',
+                'description.required' => 'description is required',
+            ]);
         $productcategory = ProductCategory::findOrFail($id);
         $productcategory->update($request->all());
         return redirect('admin/productcategories');

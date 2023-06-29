@@ -22,7 +22,7 @@
                 imageUrl: 'https://media.giphy.com/media/1ZnG0vysD6x8RMUnsG/giphy.gif',
                 imageAlt: 'gif',
                 toast: true,
-                timer: 3000,
+                timer: 4000,
                 showConfirmButton: false,
             })
         </script>

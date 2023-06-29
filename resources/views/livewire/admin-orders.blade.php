@@ -30,7 +30,7 @@
             @foreach($orders as $order)
                 <tr>
                     <td>{{$order->id}}</td>
-                    <td>{{$order->user->name}}</td>
+                    <td>@if($order->user){{$order->user->id .' - '. $order->user->name}}@else <span class="text-danger">deleted user</span> @endif</td>
                     <td class="@if($order->status == 'unpaid') text-danger @else text-success @endif" >{{$order->status}}</td>
                     <td>{{$order->payment_intent}}</td>
                     <td>&euro;{{$order->total_price}}</td>

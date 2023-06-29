@@ -10,7 +10,7 @@
         <h2>Order #{{$order->id}} - &euro;{{$order->total_price}} Details:</h2>
         <hr>
         <div class="pt-2">
-            <p>User: {{$order->user->name . ' - ' . $order->user->email}}</p>
+            <p>User: @if($order->user){{$order->user->name . ' - ' . $order->user->email}}@else <span class="text-danger">deleted user</span> @endif</p>
             <p>Status: <span class="font-weight-bolder text-success @if($order->status != 'paid') text-danger @endif">{{$order->status}}</span></p>
             <p>Address: {{$order->address->address . ' ' . $order->address->number . ', ' . $order->address->postal_code .' '.$order->address->city . ', '. $order->address->state . ' ' . $order->address->country}}</p>
             <p>Payment Intent: @if($order->payment_intent){{$order->payment_intent}}@else <span class="text-danger">no payment</span> @endif</p>
@@ -33,9 +33,9 @@
                 <td>{{$product->id}}</a></td>
                 <td>{{$product->name}}</td>
                 <td>{{$sizes[$product->pivot->size_id-1]->name}}</td>
-                <td>&euro;{{$product->price}}</td>
+                <td>&euro;{{$product->pivot->product_price}}</td>
                 <td>{{$product->pivot->quantity}}</td>
-                <td>&euro;{{$product->pivot->quantity * $product->price}}</td>
+                <td>&euro;{{$product->pivot->quantity * $product->pivot->product_price}}</td>
             </tr>
         @endforeach
         </tbody>
