@@ -47,10 +47,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post("/checkout", [CartController::class, "checkout"])->name("frontend.checkout");
     Route::get("/success", [CartController::class, "success"])->name("frontend.checkout.success");
     Route::get("/cancel", [CartController::class, "cancel"])->name("frontend.checkout.cancel");
-    Route::post("/webhook",[CartController::class,'webhook'])->name('frontend.checkout.webhook');
-//fallback route wordt actief als er naar een onbestaande route gesurft word zoals checkout zonder data
 });
-
+Route::post("/webhook",[CartController::class,'webhook'])->name('frontend.checkout.webhook');
+//fallback route wordt actief als er naar een onbestaande route gesurft word zoals checkout zonder data
 Route::fallback(function(){
     Session::flash('error');
     return redirect()->route('frontend.home');
