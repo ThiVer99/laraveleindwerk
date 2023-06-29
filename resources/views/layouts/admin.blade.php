@@ -23,7 +23,7 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <x-page-heading title="Backend" buttonText="Generate" buttonUrl="/custom-url"/>
+                <x-page-heading title="Backend" />
 
                 <!-- Content Row -->
                 @include('components._backend-cards')
