@@ -58,8 +58,11 @@ class CartController extends Controller
             'country' => 'required|between:1,255',
             'email' => 'required|email',
         ]);
+        //hier kijk ik of het address al gekend is in de database als dit zo is dan word
+        //die id toegekend aan de order
         $address =
-            Address::where('address' ,'=' , strtoupper($request->address))
+            Address::where('name', '=' , strtoupper($request->lastName) . ' ' . strtoupper($request->firstName))
+                ->where('address' ,'=' , strtoupper($request->address))
             ->where('number','=',strtoupper($request->number))
             ->where('city','=',strtoupper($request->city))
             ->where('postal_code','=',strtoupper($request->postalCode))
