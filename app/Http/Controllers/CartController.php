@@ -193,7 +193,7 @@ class CartController extends Controller
                 $order = Order::where('session_id', $session->id)->first();
                 if ($order && $order->status == 'unpaid' && $session->payment_intent) {
                     $order->payment_intent = $session->payment_intent;
-                    $order->status = 'test';
+                    $order->status = 'paid';
                     $order->save();
                     //send email to customer
                 }
