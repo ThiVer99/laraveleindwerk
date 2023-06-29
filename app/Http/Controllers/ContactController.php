@@ -11,9 +11,6 @@ use Illuminate\Validation\Rule;
 class ContactController extends Controller
 {
     //
-    public function create(){
-        return view('contactformulier');
-    }
     public function store(Request $request){
         request()->validate([
             'name'=> ['required','between:2,255'],
