@@ -31,11 +31,6 @@
         <tbody>
 
         @foreach($users as $user)
-
-            @if($loop->first)
-                aantal : {{$loop->count}}
-            @endif
-
             <tr>
                 <td>{{$user->id}}</td>
                 <td>
