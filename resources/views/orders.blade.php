@@ -38,6 +38,13 @@
                                     </div>
                                     <div id="panelsStayOpen-collapse{{$order->id}}" class="accordion-collapse collapse">
                                         <div class="accordion-body d-flex flex-column gap-2">
+                                            <div>
+                                                <h3>delivery address:</h3>
+                                                <p>{{$order->address->address . ' ' . $order->address->number . ', '}}</p>
+                                                <p>{{$order->address->postal_code . ' ' . $order->address->city}}</p>
+                                                <p>{{$order->address->state . ' ' . $order->address->country}}</p>
+                                            </div>
+                                            <hr>
                                             @foreach($order->products as $product)
                                                 <div class="row py-4 position-relative">
                                                     <div class="col-4 col-lg-2">
