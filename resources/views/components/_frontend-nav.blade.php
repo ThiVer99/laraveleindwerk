@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg">
+<nav class="navbar fixed-top navbar-expand-lg nav-black">
     <div class="container-fluid col-12 col-lg-10 col-1">
         <a class="brand fs-5 text-decoration-none ff-pmr" href="{{ route('frontend.home') }}">Awesome Sneakers</a>
         <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
