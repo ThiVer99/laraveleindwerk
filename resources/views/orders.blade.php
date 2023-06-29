@@ -55,14 +55,14 @@
                                                     </div>
                                                     <div class="col-8 col-lg-6 row">
                                                         <p>Name: {{ $product->name }}</p>
-                                                        <p>Price: &euro; {{ $product->price }}</p>
+                                                        <p>Price: &euro; {{ $product->pivot->product_price }}</p>
                                                         <p>Size: {{$sizes[$product->pivot->size_id -1 ]->name}}</p>
                                                         <p class="m-0">
                                                             Color: {{ implode(' / ', $product->colors->pluck('name')->toArray()) }}</p>
                                                     </div>
                                                     <div class="col-4 col-lg-4 py-3 py-lg-0">
                                                         <p>Amount: {{ $product->pivot->quantity }}</p>
-                                                        <p>Total:&euro; {{ $product->price * $product->pivot->quantity }}</p>
+                                                        <p>Total:&euro; {{ $product->pivot->product_price * $product->pivot->quantity }}</p>
                                                     </div>
                                                 </div>
                                             @endforeach
